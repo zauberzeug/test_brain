@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  rosys:
+    image: "zauberzeug/rosys:latest"
+    volumes:
+      - ./:/app
+      - ~/.rosys:/root/.rosys
+      - ./../rosys:/rosys
+      - ./../nicegui/nicegui:/usr/local/lib/python3.10/site-packages/nicegui
+      - ~/data:/data
+    network_mode: host
+    restart: always
+    privileged: true
+    environment:
+      - ROBOT_ID=Test Brain
+      - TZ=Europe/Amsterdam
+    hostname: docker
+    cap_add:
+      - SYS_NICE # allow container to set process priorities
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200m"
+        max-file: "100"
+    command: /start.sh
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
