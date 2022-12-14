@@ -1,38 +1,41 @@
+
 bluetooth = Bluetooth("Test Brain")
 
 # Expander Socket 1
 serial = Serial(26, 27, 115200, 1)
-expander = Expander(serial, 25, 14)
-output_p0_13 = expander.Output(13)
-input_p0_15 = expander.Input(15)
+p0 = Expander(serial, 25, 14)
+output_p0_13 = p0.Output(13)
+input_p0_15 = p0.Input(15)
 
 # Socket 2 OOGIIR
-output_05 = Output(5)
-output_04 = Output(4)
+output_5 = Output(5)
+output_4 = Output(4)
 input_36 = Input(36)
 input_13 = Input(13)
 
 # Socket 3 can
 can = Can(32, 33, 1000000)
-output_p0_02 = expander.Output(2)
-input_p0_14 = expander.Input(14)
+output_p0_2 = p0.Output(2)
+input_p0_14 = p0.Input(14)
 
 # Socket 4 OOGOOR
-output_p0_33 = expander.Output(33)
-output_p0_04 = expander.Output(4)
-output_p0_32 = expander.Output(32)
-output_p0_05 = expander.Output(5)
+output_p0_33 = p0.Output(33)
+output_p0_4 = p0.Output(4)
+output_p0_32 = p0.Output(32)
+output_p0_5 = p0.Output(5)
 
 # Socket 5
 
 # Socket 6 Bumper
-input_p0_12 = expander.Input(12)
-input_p0_25 = expander.Input(25)
-input_p0_22 = expander.Input(22)
-input_p0_23 = expander.Input(23)
+input_p0_12 = p0.Input(12)
+input_p0_25 = p0.Input(25)
+input_p0_22 = p0.Input(22)
+input_p0_23 = p0.Input(23)
 
-
-core.output("core.millis")
+int i = 0
+int y = 0
+int x = 0
+core.output("core.millis y i x")
 
 rdyp = Output(15)
 en3 = Output(12)
