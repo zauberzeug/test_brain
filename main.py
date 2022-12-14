@@ -5,14 +5,28 @@ import rosys
 from nicegui import ui
 
 import log
+import modules
 
 log = log.configure()
 
+rosys.hardware.SerialCommunication.search_paths.insert(0, '/dev/ttyTHS0')
 is_real = rosys.hardware.SerialCommunication.is_possible()
 if is_real:
     communication = rosys.hardware.SerialCommunication()
     robot_brain = rosys.hardware.RobotBrain(communication)
+    if communication.device_path == '/dev/ttyTHS0':
+        robot_brain.lizard_firmware.flash_params = ['xavier']
     robot = rosys.hardware.WheelsHardware(robot_brain)
+
+test_brain_modules = {
+    'Socket 1': 'rs485',
+    'Socket 2': 'oogiir',
+    'Socket 3': 'can',
+    'Socket 4': 'oogoor',
+    'Socket 5': 'None',
+    'Socket 6': 'bumper'
+}
+available_modules = ['none', 'rs485', 'bumper', 'can', 'oogiir', 'oogoor']
 
 
 @ui.page('/', shared=True)
@@ -41,10 +55,26 @@ async def index():
     with ui.column().classes('w-full no-wrap items-stretch q-px-md'):
         with ui.row().classes('items-stretch justify-items-stretch').style('flex-wrap:nowrap'):
 
-            # Modules
+            # Module selection
             with ui.card():
-                ui.button('Start Test', on_click=start_test).props('outline')
+                with ui.column():
+                    test_brain = ui.radio(['Test Brain', 'To be tested'], value='Test Brain',
+                                          on_change=lambda e: ui.notify(e.value)).props('inline')
+                    for key, value in test_brain_modules.items():
+                        with ui.row().bind_visibility_from(test_brain, 'value', value='Test Brain'):
+                            ui.markdown(f'###### {key}')
+                            ui.select(
+                                [value], value=f'{value}',
+                                on_change=lambda e: ui.notify(e.value)
+                            )
 
+            rs485 = modules.Rs485(1, robot_brain)
+            oogiir = modules.Oogiir(2, robot_brain)
+            can = modules.Can(3, robot_brain)
+            oogoor = modules.Oogoor(4, robot_brain)
+            bumper = modules.Bumper(6, robot_brain)
+
+        with ui.row().classes('items-stretch justify-items-stretch').style('flex-wrap:nowrap'):
             with ui.card():
                 if is_real:
                     with ui.row():
