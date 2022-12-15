@@ -6,6 +6,7 @@ from nicegui import ui
 
 import log
 import modules
+from hardware import HardwareManager
 
 log = log.configure()
 
@@ -16,7 +17,7 @@ if is_real:
     robot_brain = rosys.hardware.RobotBrain(communication)
     if communication.device_path == '/dev/ttyTHS0':
         robot_brain.lizard_firmware.flash_params = ['xavier']
-    robot = rosys.hardware.WheelsHardware(robot_brain)
+
 
 test_brain_modules = {
     'Socket 1': 'rs485',
@@ -57,30 +58,37 @@ async def index():
 
             # Module selection
             with ui.card():
-                with ui.column():
+                with ui.row():
                     test_brain = ui.radio(['Test Brain', 'To be tested'], value='Test Brain',
                                           on_change=lambda e: ui.notify(e.value)).props('inline')
                     for key, value in test_brain_modules.items():
-                        with ui.row().bind_visibility_from(test_brain, 'value', value='Test Brain'):
+                        with ui.column().bind_visibility_from(test_brain, 'value', value='Test Brain'):
                             ui.markdown(f'###### {key}')
                             ui.select(
                                 [value], value=f'{value}',
                                 on_change=lambda e: ui.notify(e.value)
                             )
+        with ui.row():
+            rs485 = modules.Rs485(1, robot_brain, rx=26, rx_p0=True, tx=27, tx_p0=True,
+                                  out_1=13, out_1_p0=True, in_1=15, in_1_p0=True)
+            oogiir = modules.Oogiir(2, robot_brain, out_1=5, out_2=4, in_1=36, in_2=13)
+            can = modules.Can(3, robot_brain, rx=32, tx=33, out_1=2, out_1_p0=True, in_1=14, in_1_p0=True)
+        with ui.row():
+            oogoor = modules.Oogoor(4, robot_brain, out_1=33, out_1_p0=True, out_2=4,
+                                    out_2_p0=True, out_3=32, out_3_p0=True, out_4=5, out_4_p0=True)
+            bumper = modules.Bumper(6, robot_brain, in_1=12, in_1_p0=True, in_2=25,
+                                    in_2_p0=True, in_3=22, in_3_p0=True, in_4=23, in_4_p0=True)
 
-            rs485 = modules.Rs485(1, robot_brain)
-            oogiir = modules.Oogiir(2, robot_brain)
-            can = modules.Can(3, robot_brain)
-            oogoor = modules.Oogoor(4, robot_brain)
-            bumper = modules.Bumper(6, robot_brain)
+        hardware_manager = HardwareManager(robot_brain, socket_1=rs485, socket_2=oogiir,
+                                           socket_3=can, socket_4=oogoor, socket_6=bumper)
 
         with ui.row().classes('items-stretch justify-items-stretch').style('flex-wrap:nowrap'):
             with ui.card():
                 if is_real:
                     with ui.row():
                         with ui.column():
-                            robot.robot_brain.developer_ui()
+                            robot_brain.developer_ui()
                         with ui.column():
-                            robot.robot_brain.communication.debug_ui()
+                            robot_brain.communication.debug_ui()
 
 ui.run(title='Test Brain', port=80 if is_real else 8080)
