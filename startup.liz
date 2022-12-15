@@ -1,41 +1,47 @@
 
 bluetooth = Bluetooth("Test Brain")
 
-# Expander Socket 1
+# Expander Socket 1 rs485
 serial = Serial(26, 27, 115200, 1)
 p0 = Expander(serial, 25, 14)
 output_p0_13 = p0.Output(13)
 input_p0_15 = p0.Input(15)
+str socket_1 = "rs485"
 
 # Socket 2 OOGIIR
 output_5 = Output(5)
 output_4 = Output(4)
 input_36 = Input(36)
 input_13 = Input(13)
+str socket_2 = "oogiir"
 
 # Socket 3 can
 can = Can(32, 33, 1000000)
 output_p0_2 = p0.Output(2)
 input_p0_14 = p0.Input(14)
+str socket_3 = "can"
 
 # Socket 4 OOGOOR
 output_p0_33 = p0.Output(33)
 output_p0_4 = p0.Output(4)
 output_p0_32 = p0.Output(32)
 output_p0_5 = p0.Output(5)
+str socket_4 = "oogoor"
 
 # Socket 5
+str socket_5 = "none"
 
 # Socket 6 Bumper
 input_p0_12 = p0.Input(12)
 input_p0_25 = p0.Input(25)
 input_p0_22 = p0.Input(22)
 input_p0_23 = p0.Input(23)
+str socket_6 = "bumper"
 
-int i = 0
-int y = 0
-int x = 0
-core.output("core.millis y i x")
+# rdyp_status = Input(39)
+# vdp_status = p0.Input(39)
+
+core.output("core.millis socket_1 input_p0_15.level socket_2 input_36.level input_13.level socket_3 input_p0_14.level socket_4 socket_5 socket_6 input_p0_12.level input_p0_25.level input_p0_22.level input_p0_23.level")
 
 rdyp = Output(15)
 en3 = Output(12)
