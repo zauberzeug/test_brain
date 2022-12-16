@@ -8,14 +8,14 @@ s1_out_1 = p0.Output(26)
 s1_out_2 = p0.Output(27)
 s1_out_3 = p0.Output(13)
 s1_out_4 = p0.Output(15)
-str socket_1 = "oogoor"
+str socket_1 = "oogoor_v01"
 
 # Socket 2 OOGIIR
 s2_out_1 = Output(4)
 s2_out_2 = Output(13)
 s2_in_1 = Input(36)
 s2_in_2 = Input(5)
-str socket_2 = "oogiir"
+str socket_2 = "oogiir_v01"
 
 # Socket 3 CAN V03(old version!)
 can = Can(32, 33, 1000000)
@@ -28,7 +28,7 @@ s4_out_1 = p0.Output(33)
 s4_out_2 = p0.Output(4)
 s4_out_3 = p0.Output(32)
 s4_out_4 = p0.Output(5)
-str socket_4 = "oogoor"
+str socket_4 = "oogoor_v01"
 
 # Socket 5 OIIO 
 s5_out_1 = p0.Output(19)

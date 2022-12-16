@@ -21,12 +21,12 @@ if is_real:
 
 
 tester_brain_modules = {
-    '1': 'rs485',
-    '2': 'oogiir',
-    '3': 'can',
-    '4': 'oogoor',
+    '1': 'rs485_v04',
+    '2': 'oogiir_v01',
+    '3': 'can_v04',
+    '4': 'oogoor_v01',
     '5': 'none',
-    '6': 'bumper'
+    '6': 'bumper_v02'
 }
 tested_brain_modules = {
     '1': 'none',
@@ -36,7 +36,7 @@ tested_brain_modules = {
     '5': 'none',
     '6': 'none'
 }
-available_modules = ['none', 'rs485', 'bumper', 'can', 'oogiir', 'oogoor', 'can_v03']
+available_modules = ['none', 'rs485_v04', 'bumper_v02', 'can_v04', 'oogiir_v01', 'oogoor_v01', 'can_v03']
 
 
 @ui.page('/', shared=True)
@@ -52,19 +52,19 @@ async def index():
             with module_row:
                 for key, value in tested_brain_modules.items():
                     if value != 'none':
-                        if value == 'rs485':
+                        if value == 'rs485_v04':
                             rs485_test = modules.Rs485V04(int(key), robot_brain)
                             hardware_manager.sockets[key] = rs485_test
-                        if value == 'oogiir':
+                        if value == 'oogiir_v01':
                             oogiir_test = modules.OogiirV01(int(key), robot_brain)
                             hardware_manager.sockets[key] = oogiir_test
-                        if value == 'oogoor':
+                        if value == 'oogoor_v01':
                             oogoor_test = modules.OogoorV01(int(key), robot_brain)
                             hardware_manager.sockets[key] = oogoor_test
-                        if value == 'can':
+                        if value == 'can_v04':
                             can_test = modules.CanV04(int(key), robot_brain)
                             hardware_manager.sockets[key] = can_test
-                        if value == 'bumper':
+                        if value == 'bumper_v02':
                             bumper_test = modules.BumperV02(int(key), robot_brain)
                             hardware_manager.sockets[key] = bumper_test
                         if value == 'can_v03':

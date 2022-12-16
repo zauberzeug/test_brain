@@ -48,23 +48,23 @@ class HardwareManager():
                 self.vdp_status = int(words.pop(0)) == 0
 
                 for socket, module in self.sockets.items():
-                    if words[0] == '"rs485"':
+                    if words[0] == '"rs485_v04"':
                         words.pop(0)
                         module.in_1_status = int(words.pop(0)) == 1
 
-                    elif words[0] == '"oogoor"':
+                    elif words[0] == '"oogoor_v01"':
                         words.pop(0)
 
-                    elif words[0] == '"oogiir"':
+                    elif words[0] == '"oogiir_v01"':
                         words.pop(0)
                         module.in_1_status = int(words.pop(0)) == 1
                         module.in_2_status = int(words.pop(0)) == 1
 
-                    elif words[0] == '"can"':
+                    elif words[0] == '"can_v04"':
                         words.pop(0)
                         module.in_1_status = int(words.pop(0)) == 1
 
-                    elif words[0] == '"bumper"':
+                    elif words[0] == '"bumper_v02"':
                         words.pop(0)
                         module.in_1_status = int(words.pop(0)) == 1
                         module.in_2_status = int(words.pop(0)) == 1

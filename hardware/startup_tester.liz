@@ -1,42 +1,42 @@
 
 bluetooth = Bluetooth("Test Brain")
 
-# Expander Socket 1 rs485
+# Expander Socket 1 rs485_v04
 serial = Serial(26, 27, 115200, 1)
 p0 = Expander(serial, 25, 14)
 s1_out_1 = p0.Output(13)
 s1_in_1 = p0.Input(15)
-str socket_1 = "rs485"
+str socket_1 = "rs485_v04"
 
-# Socket 2 OOGIIR
+# Socket 2 OOGIIR_v01
 s2_out_1 = Output(5)
 s2_out_2 = Output(4)
 s2_in_1 = Input(36)
 s2_in_2 = Input(13)
-str socket_2 = "oogiir"
+str socket_2 = "oogiir_v01"
 
-# Socket 3 can
+# Socket 3 can_v04
 can = Can(32, 33, 1000000)
 s3_out_1 = p0.Output(2)
 s3_in_1 = p0.Input(14)
-str socket_3 = "can"
+str socket_3 = "can_v04"
 
-# Socket 4 OOGOOR
+# Socket 4 OOGOOR_v01
 s4_out_1 = p0.Output(33)
 s4_out_2 = p0.Output(4)
 s4_out_3 = p0.Output(32)
 s4_out_4 = p0.Output(5)
-str socket_4 = "oogoor"
+str socket_4 = "oogoor_v01"
 
 # Socket 5
 str socket_5 = "none"
 
-# Socket 6 Bumper
+# Socket 6 Bumper_v02
 s6_in_1 = p0.Input(12)
 s6_in_2 = p0.Input(25)
 s6_in_3 = p0.Input(22)
 s6_in_4 = p0.Input(23)
-str socket_6 = "bumper"
+str socket_6 = "bumper_v02"
 
 rdyp_status = Input(39)
 vdp_status = p0.Input(39)
