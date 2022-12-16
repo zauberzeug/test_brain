@@ -20,13 +20,15 @@ class HardwareManager():
 
         self.robot_brain = robot_brain
         self.sockets = {
-            'socket_1': socket_1,
-            'socket_2': socket_2,
-            'socket_3': socket_3,
-            'socket_4': socket_4,
-            'socket_5': socket_5,
-            'socket_6': socket_6,
+            '1': socket_1,
+            '2': socket_2,
+            '3': socket_3,
+            '4': socket_4,
+            '5': socket_5,
+            '6': socket_6,
         }
+        self.rdyp_status: bool = False
+        self.vdp_status: bool = False
 
         self.log = logging.getLogger('test_brain.hardware_manager')
 
@@ -41,6 +43,9 @@ class HardwareManager():
             if words[0] == 'core':
                 words.pop(0)
                 words.pop(0)
+
+            self.rdyp_status = int(words.pop(0)) == 0
+            self.vdp_status = int(words.pop(0)) == 0
 
             for socket, module in self.sockets.items():
                 if words[0] == '"rs485"':
