@@ -15,7 +15,7 @@ is_real = rosys.hardware.SerialCommunication.is_possible()
 if is_real:
     communication = rosys.hardware.SerialCommunication()
     robot_brain = rosys.hardware.RobotBrain(communication)
-    hardware_manager_2 = HardwareManager(robot_brain)
+    hardware_manager = HardwareManager(robot_brain)
     if communication.device_path == '/dev/ttyTHS0':
         robot_brain.lizard_firmware.flash_params = ['xavier']
 
@@ -54,21 +54,21 @@ async def index():
                     if value != 'none':
                         if value == 'rs485':
                             rs485_test = modules.Rs485(int(key), robot_brain)
-                            hardware_manager_2.sockets[key] = rs485_test
+                            hardware_manager.sockets[key] = rs485_test
                         if value == 'oogiir':
                             oogiir_test = modules.Oogiir(int(key), robot_brain)
-                            hardware_manager_2.sockets[key] = oogiir_test
+                            hardware_manager.sockets[key] = oogiir_test
                         if value == 'oogoor':
                             oogoor_test = modules.Oogoor(int(key), robot_brain)
-                            hardware_manager_2.sockets[key] = oogoor_test
+                            hardware_manager.sockets[key] = oogoor_test
                         if value == 'can':
                             can_test = modules.Can(int(key), robot_brain)
-                            hardware_manager_2.sockets[key] = can_test
+                            hardware_manager.sockets[key] = can_test
                         if value == 'bumper':
                             bumper_test = modules.Bumper(int(key), robot_brain)
-                            hardware_manager_2.sockets[key] = bumper_test
+                            hardware_manager.sockets[key] = bumper_test
                     else:
-                        hardware_manager_2.sockets[key] = None
+                        hardware_manager.sockets[key] = None
         else:
             with module_row:
                 rs485_tester = modules.Rs485(1, robot_brain, rx=26, rx_p0=True, tx=27, tx_p0=True,
@@ -79,7 +79,7 @@ async def index():
                                                out_2_p0=True, out_3=32, out_3_p0=True, out_4=5, out_4_p0=True)
                 bumper_tester = modules.Bumper(6, robot_brain, in_1=12, in_1_p0=True, in_2=25,
                                                in_2_p0=True, in_3=22, in_3_p0=True, in_4=23, in_4_p0=True)
-            hardware_manager_2.sockets = {
+            hardware_manager.sockets = {
                 '1': rs485_tester,
                 '2': oogiir_tester,
                 '3': can_tester,
@@ -109,7 +109,7 @@ async def index():
     with ui.column().classes('w-full no-wrap items-stretch q-px-md'):
         with ui.row().classes('items-stretch justify-items-stretch').style('flex-wrap:nowrap'):
 
-            # Module selection
+            # module selection
             with ui.card():
                 with ui.row():
                     with ui.column():
@@ -117,7 +117,7 @@ async def index():
                                                    on_change=lambda e: ui.notify(e.value)).props('inline')
                         ui.button('Set Modules', on_click=set_modules)
 
-                    # Fix selection for TesteR Brain
+                    # fix selection for TesteR Brain
                     with ui.row().bind_visibility_from(test_brain_type, 'value', value='Tester'):
                         for key, value in tester_brain_modules.items():
                             with ui.column():
@@ -127,7 +127,7 @@ async def index():
                                     on_change=lambda e: ui.notify(e.value)
                                 )
 
-                    # Selection for TesteD brain
+                    # selection for TesteD brain
                     with ui.row().bind_visibility_from(test_brain_type, 'value', value='To be tested'):
                         with ui.column():
                             ui.markdown(f'###### Socket 1')
@@ -166,10 +166,11 @@ async def index():
                                 on_change=lambda: update_modules(select_socket6.value, '6')
                             )
 
-        # Pin Selection for TesteD Brain
+        # pin Selection for TesteD Brain
         with ui.row() as module_row:
             set_modules()
 
+        # development tools
         with ui.row().classes('items-stretch justify-items-stretch').style('flex-wrap:nowrap'):
             with ui.card():
                 if is_real:
@@ -182,8 +183,8 @@ async def index():
                             ui.markdown(f'**Hardware Manager of "{test_brain_type.value}"**').classes('col-grow')
                             robot_status = ui.markdown()
                     ui.timer(1, lambda: robot_status.set_content(
-                        f'Empty Sockets:{hardware_manager_2.sockets}\
-                            <br>rdyp: {hardware_manager_2.rdyp_status}<br>vdp: {hardware_manager_2.vdp_status}'
+                        f'Empty Sockets:{hardware_manager.sockets}\
+                            <br>rdyp: {hardware_manager.rdyp_status}<br>vdp: {hardware_manager.vdp_status}'
                     ))
 
 ui.run(title='Test Brain', port=80 if is_real else 8080)
