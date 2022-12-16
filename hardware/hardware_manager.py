@@ -44,34 +44,39 @@ class HardwareManager():
                 words.pop(0)
                 words.pop(0)
 
-            self.rdyp_status = int(words.pop(0)) == 0
-            self.vdp_status = int(words.pop(0)) == 0
+                self.rdyp_status = int(words.pop(0)) == 0
+                self.vdp_status = int(words.pop(0)) == 0
 
-            for socket, module in self.sockets.items():
-                if words[0] == '"rs485"':
-                    words.pop(0)
-                    module.in_1_status = int(words.pop(0)) == 1
+                for socket, module in self.sockets.items():
+                    if words[0] == '"rs485"':
+                        words.pop(0)
+                        module.in_1_status = int(words.pop(0)) == 1
 
-                elif words[0] == '"oogoor"':
-                    words.pop(0)
+                    elif words[0] == '"oogoor"':
+                        words.pop(0)
 
-                elif words[0] == '"oogiir"':
-                    words.pop(0)
-                    module.in_1_status = int(words.pop(0)) == 1
-                    module.in_2_status = int(words.pop(0)) == 1
+                    elif words[0] == '"oogiir"':
+                        words.pop(0)
+                        module.in_1_status = int(words.pop(0)) == 1
+                        module.in_2_status = int(words.pop(0)) == 1
 
-                elif words[0] == '"can"':
-                    words.pop(0)
-                    module.in_1_status = int(words.pop(0)) == 1
+                    elif words[0] == '"can"':
+                        words.pop(0)
+                        module.in_1_status = int(words.pop(0)) == 1
 
-                elif words[0] == '"bumper"':
-                    words.pop(0)
-                    module.in_1_status = int(words.pop(0)) == 1
-                    module.in_2_status = int(words.pop(0)) == 1
-                    module.in_3_status = int(words.pop(0)) == 1
-                    module.in_4_status = int(words.pop(0)) == 1
+                    elif words[0] == '"bumper"':
+                        words.pop(0)
+                        module.in_1_status = int(words.pop(0)) == 1
+                        module.in_2_status = int(words.pop(0)) == 1
+                        module.in_3_status = int(words.pop(0)) == 1
+                        module.in_4_status = int(words.pop(0)) == 1
 
-                elif words[0] == '"none"':
-                    words.pop(0)
+                    elif words[0] == '"none"':
+                        words.pop(0)
+
+                    elif words[0] == '"can_v03"':
+                        words.pop(0)
+                        module.in_1_status = int(words.pop(0)) == 1
+                        module.in_2_status = int(words.pop(0)) == 1
 
         self.UPDATED.emit()
