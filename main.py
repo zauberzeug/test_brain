@@ -14,7 +14,7 @@ rosys.hardware.SerialCommunication.search_paths.insert(0, '/dev/ttyTHS0')
 is_real = rosys.hardware.SerialCommunication.is_possible()
 if is_real:
     communication = rosys.hardware.SerialCommunication()
-    robot_brain = rosys.hardware.RobotBrain(communication)
+    robot_brain = rosys.hardware.RobotBrain(communication, lizard_startup='hardware/startup_rb14.liz')
     hardware_manager = HardwareManager(robot_brain)
     if communication.device_path == '/dev/ttyTHS0':
         robot_brain.lizard_firmware.flash_params = ['xavier']
@@ -36,7 +36,7 @@ tested_brain_modules = {
     '5': 'none',
     '6': 'none'
 }
-available_modules = ['none', 'rs485', 'bumper', 'can', 'oogiir', 'oogoor']
+available_modules = ['none', 'rs485', 'bumper', 'can', 'oogiir', 'oogoor', 'can_v03']
 
 
 @ui.page('/', shared=True)
@@ -53,32 +53,32 @@ async def index():
                 for key, value in tested_brain_modules.items():
                     if value != 'none':
                         if value == 'rs485':
-                            rs485_test = modules.Rs485(int(key), robot_brain)
+                            rs485_test = modules.Rs485V04(int(key), robot_brain)
                             hardware_manager.sockets[key] = rs485_test
                         if value == 'oogiir':
-                            oogiir_test = modules.Oogiir(int(key), robot_brain)
+                            oogiir_test = modules.OogiirV01(int(key), robot_brain)
                             hardware_manager.sockets[key] = oogiir_test
                         if value == 'oogoor':
-                            oogoor_test = modules.Oogoor(int(key), robot_brain)
+                            oogoor_test = modules.OogoorV01(int(key), robot_brain)
                             hardware_manager.sockets[key] = oogoor_test
                         if value == 'can':
-                            can_test = modules.Can(int(key), robot_brain)
+                            can_test = modules.CanV04(int(key), robot_brain)
                             hardware_manager.sockets[key] = can_test
                         if value == 'bumper':
-                            bumper_test = modules.Bumper(int(key), robot_brain)
+                            bumper_test = modules.BumperV02(int(key), robot_brain)
                             hardware_manager.sockets[key] = bumper_test
+                        if value == 'can_v03':
+                            can_v03_test = modules.CanV03(int(key), robot_brain)
+                            hardware_manager.sockets[key] = can_v03_test
                     else:
                         hardware_manager.sockets[key] = None
         else:
             with module_row:
-                rs485_tester = modules.Rs485(1, robot_brain, rx=26, rx_p0=True, tx=27, tx_p0=True,
-                                             out_1=13, out_1_p0=True, in_1=15, in_1_p0=True)
-                oogiir_tester = modules.Oogiir(2, robot_brain, out_1=5, out_2=4, in_1=36, in_2=13)
-                can_tester = modules.Can(3, robot_brain, rx=32, tx=33, out_1=2, out_1_p0=True, in_1=14, in_1_p0=True)
-                oogoor_tester = modules.Oogoor(4, robot_brain, out_1=33, out_1_p0=True, out_2=4,
-                                               out_2_p0=True, out_3=32, out_3_p0=True, out_4=5, out_4_p0=True)
-                bumper_tester = modules.Bumper(6, robot_brain, in_1=12, in_1_p0=True, in_2=25,
-                                               in_2_p0=True, in_3=22, in_3_p0=True, in_4=23, in_4_p0=True)
+                rs485_tester = modules.Rs485V04(1, robot_brain)
+                oogiir_tester = modules.OogiirV01(2, robot_brain)
+                can_tester = modules.CanV04(3, robot_brain)
+                oogoor_tester = modules.OogoorV01(4, robot_brain)
+                bumper_tester = modules.BumperV02(6, robot_brain)
             hardware_manager.sockets = {
                 '1': rs485_tester,
                 '2': oogiir_tester,
@@ -182,9 +182,9 @@ async def index():
                         with ui.column():
                             ui.markdown(f'**Hardware Manager of "{test_brain_type.value}"**').classes('col-grow')
                             robot_status = ui.markdown()
+                            ui.button('Reset Lizard', on_click=robot_brain.restart)
                     ui.timer(1, lambda: robot_status.set_content(
-                        f'Empty Sockets:{hardware_manager.sockets}\
-                            <br>rdyp: {hardware_manager.rdyp_status}<br>vdp: {hardware_manager.vdp_status}'
+                        f'rdyp: {hardware_manager.rdyp_status}<br>vdp: {hardware_manager.vdp_status}'
                     ))
 
 ui.run(title='Test Brain', port=80 if is_real else 8080)
