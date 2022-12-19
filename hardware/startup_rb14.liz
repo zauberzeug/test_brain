@@ -35,7 +35,7 @@ s5_out_1 = p0.Output(19)
 s5_in_1 = p0.Input(34)
 s5_in_2 = p0.Input(35)
 s5_out_2 = p0.Output(18)
-str socket_5 = "oogiir"
+str socket_5 = "oogiir_v01"
 
 # Socket 6 CAN V03(old version!)
 can_2 = p0.Can(39, 23, 1000000)
