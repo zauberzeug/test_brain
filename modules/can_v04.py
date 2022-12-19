@@ -19,6 +19,7 @@ class CanV04(Module):
                 with ui.column():
                     with ui.row():
                         ui.label('rx pin')
+                        ui.button('send can massage', on_click=self.send_can)
                     with ui.row():
                         ui.label('tx pin')
                     with ui.row():
@@ -33,3 +34,6 @@ class CanV04(Module):
 
     async def send_out_1(self):
         await self.send_out(1, self.out_1_value)
+
+    async def send_can(self):
+        await self.robot_brain.send('can.send(1,2,3,4,5,6,7,8)')

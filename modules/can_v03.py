@@ -19,8 +19,10 @@ class CanV03(Module):
                 with ui.column():
                     with ui.row():
                         ui.label('rx pin')
+                        ui.button('send can massage', on_click=self.send_can)
                     with ui.row():
                         ui.label('tx pin')
+
                     with ui.row():
                         ui.label('in_1 pin')
                         ui.icon('highlight_off').classes('text-red').bind_visibility_from(self,
@@ -33,3 +35,6 @@ class CanV03(Module):
                                                                                           'in_2_status', backward=lambda x: not x)
                         ui.icon('check_circle_outline').classes(
                             'text-green').bind_visibility_from(self, 'in_2_status')
+
+    async def send_can(self):
+        await self.robot_brain.send('can.send(1,2,3,4,5,6,7,8)')
