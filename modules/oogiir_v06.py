@@ -6,17 +6,17 @@ from nicegui import ui
 from .module import Module
 
 
-class OogiirV01(Module):
+class OogiirV06(Module):
     def __init__(self, socket: int, robot_brain: rosys.hardware.RobotBrain) -> None:
         super().__init__(socket, robot_brain)
         self.in_1_status = False
         self.in_2_status = False
         self.out_1_value = False
         self.out_2_value = False
-        self.log = logging.getLogger('test_brain.oogiir_v01')
+        self.log = logging.getLogger('test_brain.oogiir_v06')
 
         with ui.card():
-            ui.markdown(f'###### Socket {self.socket}: oogiir_v01')
+            ui.markdown(f'**Socket {self.socket}: oogiir_v06**')
             with ui.row():
                 with ui.column():
                     with ui.row():

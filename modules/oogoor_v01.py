@@ -15,7 +15,7 @@ class OogoorV01(Module):
         self.out_4_value = False
         self.log = logging.getLogger('test_brain.oogoor_v01')
         with ui.card():
-            ui.markdown(f'###### Socket {self.socket}: oogoor_v01')
+            ui.markdown(f'**Socket {self.socket}: oogoor_v01**')
             with ui.row():
                 with ui.column():
                     with ui.row():

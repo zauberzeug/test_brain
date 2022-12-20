@@ -20,7 +20,7 @@ if is_real:
         robot_brain.lizard_firmware.flash_params = ['xavier']
 
 
-@ui.page('/', shared=True)
+@ui.page('/')
 async def index():
 
     async def set_modules():
@@ -54,7 +54,7 @@ async def index():
             with ui.card():
                 with ui.row():
                     with ui.column():
-                        ui.button('Get Modules', on_click=set_modules)
+                        ui.button('Set Modules', on_click=set_modules)
 
         # pin Selection for TesteD Brain
         with ui.row() as module_row:
