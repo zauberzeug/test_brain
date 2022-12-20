@@ -87,7 +87,7 @@ class HardwareManager():
                         self.sockets[socket] = 'oogoor_v01'
                         words.pop(0)
 
-                    elif words[0] == '"oogiir_v01"':
+                    elif words[0] == '"oogiir_v06"':
                         self.sockets[socket] = 'oogiir_v06'
                         words.pop(0)
                         if self.sockets_set:
