@@ -14,13 +14,14 @@ class Rs485V04(Module):
         self.log = logging.getLogger('test_brain.rs485_v04')
 
         with ui.card():
-            ui.markdown(f'###### Socket {self.socket}: rs485_v04')
+            ui.markdown(f'**Socket {self.socket}: rs485_v04**')
             with ui.row():
                 with ui.column():
                     with ui.row():
-                        ui.label('rx pin')
+                        ui.button('send rs485 message', on_click=self.send_rs485)
                     with ui.row():
-                        ui.label('tx pin')
+                        ui.label('rs485 log:')
+                        self.rs485_log = ui.log(max_lines=10).classes('w-full h-20')
                     with ui.row():
                         ui.label('out_1')
                         ui.switch(value=False, on_change=self.send_out_1).bind_value(self, 'out_1_value')
@@ -33,3 +34,9 @@ class Rs485V04(Module):
 
     async def send_out_1(self):
         await self.send_out(1, self.out_1_value)
+
+    async def send_rs485(self):
+        await self.robot_brain.send('serial.send(0x000, 1, 2, 3, 4, 5, 6, 7, 8)')
+
+    async def read_rs485(self, msg: str):
+        self.rs485_log.push(msg)
