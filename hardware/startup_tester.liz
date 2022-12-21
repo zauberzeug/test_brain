@@ -5,8 +5,9 @@ bluetooth = Bluetooth("Test Brain")
 serial = Serial(26, 27, 115200, 1)
 p0 = Expander(serial, 25, 14)
 rs485 = p0.Serial(26, 27, 9600, 2)
-s1_out_1 = p0.Output(13)
-s1_in_1 = p0.Input(15)
+rs485.unmute()
+s1_out_1 = p0.Output(15)
+s1_in_1 = p0.Input(13)
 str socket_1 = "rs485_v04"
 
 # Socket 2 OOGIIR_v06
@@ -30,20 +31,24 @@ s4_out_3 = p0.Output(32)
 s4_out_4 = p0.Output(5)
 str socket_4 = "oogoor_v01"
 
-# Socket 5
-str socket_5 = "none"
+# Socket 5 BUMPER_v02
+s5_in_1 = p0.Input(19)
+s5_in_2 = p0.Input(21)
+s5_in_3 = p0.Input(35)
+s5_in_4 = p0.Input(18)
+str socket_5 = "bumper_v02"
 
-# Socket 6 Bumper_v02
-s6_in_1 = p0.Input(12)
-s6_in_2 = p0.Input(25)
-s6_in_3 = p0.Input(22)
-s6_in_4 = p0.Input(23)
-str socket_6 = "bumper_v02"
+# Socket 6 CAN_v04
+can_2 = p0.Can(22, 23, 1000000)
+can_2.unmute()
+s6_out_1 = p0.Output(12)
+s6_in_1 = p0.Input(25)
+str socket_6 = "can_v04"
 
 rdyp_status = Input(39)
 vdp_status = p0.Input(39)
 
-core.output("core.millis rdyp_status.level vdp_status.level socket_1 s1_in_1.level socket_2 s2_in_1.level s2_in_2.level socket_3 s3_in_1.level socket_4 socket_5 socket_6 s6_in_1.level s6_in_2.level s6_in_3.level s6_in_4.level")
+core.output("core.millis rdyp_status.level vdp_status.level socket_1 s1_in_1.level socket_2 s2_in_1.level s2_in_2.level socket_3 s3_in_1.level socket_4 socket_5 s5_in_1.level s5_in_2.level s5_in_3.level s5_in_4.level socket_6 s6_in_1.level")
 
 rdyp = Output(15)
 en3 = Output(12)
