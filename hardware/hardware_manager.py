@@ -59,6 +59,8 @@ class HardwareManager():
                 self.modules[socket-1] = modules.OogiirV05(socket, self.robot_brain)
             if name == 'oiio':
                 self.modules[socket-1] = modules.Oiio(socket, self.robot_brain)
+            if name == 'rs485_v03':
+                self.modules[socket-1] = modules.Rs485V03(socket, self.robot_brain)
         self.sockets_set = True
         self.log.info(f'my modules are {self.modules} ')
 
@@ -153,16 +155,24 @@ class HardwareManager():
                             words.pop(0)
                             words.pop(0)
 
-            if line.startswith('can') or line.startswith('p0: can'):
+                    elif words[0] == '"rs485_v03"':
+                        self.sockets[socket] = 'rs485_v03'
+                        words.pop(0)
+                        if self.sockets_set:
+                            self.modules[socket-1].in_1_status = int(words.pop(0)) == 1
+                            self.modules[socket-1].in_2_status = int(words.pop(0)) == 1
+                        else:
+                            words.pop(0)
+                            words.pop(0)
+
+            if line.startswith(('can', 'p0: can', 'can_2', 'p0: can_2')):
                 for socket, name in self.sockets.items():
                     if name == 'can_v04' or name == 'can_v03':
                         await self.modules[socket-1].read_can(line)
-                        return
 
-            if line.startswith('rs485') or line.startswith('p0: rs485'):
+            if line.startswith(('rs485', 'p0: rs485', 'rs485_2', 'p0: rs485_2')):
                 for socket, name in self.sockets.items():
-                    if name == 'rs485_v04':
+                    if name == 'rs485_v04' or name == 'rs485_v03':
                         await self.modules[socket-1].read_rs485(line)
-                        return
 
         self.UPDATED.emit()
