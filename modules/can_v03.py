@@ -35,8 +35,5 @@ class CanV03(Module):
                         ui.icon('check_circle_outline').classes(
                             'text-green').bind_visibility_from(self, 'in_2_status')
 
-    async def send_can(self):
-        await self.robot_brain.send('can.send(0x000, 1, 2, 3, 4, 5, 6, 7, 8)')
-
     async def read_can(self, msg: str):
         self.can_log.push(msg)

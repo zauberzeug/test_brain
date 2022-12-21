@@ -35,8 +35,5 @@ class CanV04(Module):
     async def send_out_1(self):
         await self.send_out(1, self.out_1_value)
 
-    async def send_can(self):
-        await self.robot_brain.send('can.send(0x000, 1, 2, 3, 4, 5, 6, 7, 8)')
-
     async def read_can(self, msg: str):
         self.can_log.push(msg)

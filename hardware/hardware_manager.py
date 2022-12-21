@@ -165,14 +165,14 @@ class HardwareManager():
                             words.pop(0)
                             words.pop(0)
 
-            if line.startswith(('can', 'p0: can', 'can_2', 'p0: can_2')):
+            if line.startswith('can') or line.startswith('p0: can'):
                 for socket, name in self.sockets.items():
                     if name == 'can_v04' or name == 'can_v03':
                         await self.modules[socket-1].read_can(line)
 
-            if line.startswith(('rs485', 'p0: rs485', 'rs485_2', 'p0: rs485_2')):
+            if line.startswith('rs485', 3) or line.startswith('rs485', 7):
                 for socket, name in self.sockets.items():
-                    if name == 'rs485_v04' or name == 'rs485_v03':
+                    if socket == int(line[1]) or socket == int(line[5]):
                         await self.modules[socket-1].read_rs485(line)
 
         self.UPDATED.emit()

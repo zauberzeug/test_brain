@@ -35,8 +35,5 @@ class Rs485V04(Module):
     async def send_out_1(self):
         await self.send_out(1, self.out_1_value)
 
-    async def send_rs485(self):
-        await self.robot_brain.send('rs485.send(1, 2, 3, 4, 5, 6, 7, 8)')
-
     async def read_rs485(self, msg: str):
         self.rs485_log.push(msg)

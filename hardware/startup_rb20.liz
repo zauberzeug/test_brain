@@ -1,11 +1,12 @@
 
+#startup.liz for rb20 and rb21
 bluetooth = Bluetooth("Robot Brain20")
 
 # Expander Socket 1 rs485_v03
 serial = Serial(26, 27, 115200, 1)
 p0 = Expander(serial, 25, 14)
-rs485 = p0.Serial(26, 27, 9600, 2)
-rs485.unmute()
+s1_rs485 = p0.Serial(26, 27, 9600, 2)
+s1_rs485.unmute()
 s1_in_1 = p0.Input(13)
 s1_in_2 = p0.Input(15)
 str socket_1 = "rs485_v03"
@@ -18,8 +19,8 @@ s2_in_4 = Input(4)
 str socket_2 = "bumper_v02"
 
 # Socket 3 can_v04
-can = Can(32, 33, 1000000)
-can.unmute()
+s3_can = Can(32, 33, 1000000)
+s3_can.unmute()
 s3_out_1 = p0.Output(2)
 s3_in_1 = p0.Input(14)
 str socket_3 = "can_v04"
@@ -35,8 +36,8 @@ str socket_4 = "oogiir_v06"
 str socket_5 = "none"
 
 # Socket 6 can_v03
-can_2 = p0.Can(22, 23, 1000000)
-can_2.unmute()
+s6_can = p0.Can(22, 23, 1000000)
+s6_can.unmute()
 s6_in_1 = p0.Input(25)
 s6_in_2 = p0.Input(12)
 str socket_6 = "can_v03"
