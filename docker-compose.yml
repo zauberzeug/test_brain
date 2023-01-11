@@ -6,7 +6,7 @@ services:
       - ./:/app
       - ~/.rosys:/root/.rosys
       - ./../rosys:/rosys
-      - ./../nicegui/nicegui:/usr/local/lib/python3.10/site-packages/nicegui
+      - ./../nicegui/nicegui:/usr/local/lib/python3.11/site-packages/nicegui
       - ~/data:/data
     network_mode: host
     restart: always
