@@ -18,8 +18,8 @@ s2_in_2 = Input(5)
 str socket_2 = "oogiir_v05"
 
 # Socket 3 CAN V03(old version!)
-can = Can(32, 33, 1000000)
-can.unmute()
+s3_can = Can(32, 33, 1000000)
+s3_can.unmute()
 s3_in_1 = p0.Input(14)
 s3_in_2 = p0.Input(2)
 str socket_3 = "can_v03"
@@ -39,8 +39,8 @@ s5_in_2 = p0.Input(35)
 str socket_5 = "oogiir_v06"
 
 # Socket 6 CAN V03(old version!)
-can_2 = p0.Can(39, 23, 1000000)
-can_2.unmute()
+s6_can = p0.Can(39, 23, 1000000)
+s6_can.unmute()
 s6_in_1 = p0.Input(36)
 s6_in_2 = p0.Input(12)
 str socket_6 = "can_v03"
