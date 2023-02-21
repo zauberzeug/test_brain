@@ -1,0 +1,49 @@
+
+bluetooth = Bluetooth("Test Brain")
+
+# Expander Socket 1 rs485_v03
+serial = Serial(26, 27, 115200, 1)
+p0 = Expander(serial, 25, 14)
+s1_rs485 = p0.Serial(26, 27, 9600, 2)
+s1_rs485.unmute()
+s1_in_1 = p0.Input(13)
+s1_in_2 = p0.Input(15)
+str socket_1 = "rs485_v03"
+
+# Socket 2 none
+str socket_2 = "none"
+
+# Socket 3 CAN V03(old version!)
+s3_can = Can(32, 33, 1000000)
+s3_can.unmute()
+s3_in_1 = p0.Input(14)
+s3_in_2 = p0.Input(2)
+str socket_3 = "can_v03"
+
+# Socket 4 0iio
+s4_out_1 = p0.Output(5)
+s4_out_2 = p0.Output(4)
+s4_in_1 = p0.Input(32)
+s4_in_2 = p0.Input(33)
+str socket_4 = "oiio"
+
+# Socket 5 oiio
+s5_out_1 = p0.Output(19)
+s5_out_2 = p0.Output(18)
+s5_in_1 = p0.Input(34)
+s5_in_2 = p0.Input(35)
+str socket_5 = "oiio"
+
+# Socket 6 none
+str socket_6 = "none"
+
+# this robot brain has no rdyp and vdp inputs
+int rdyp_status = 1
+int vdp_status = 1
+
+core.output("core.millis rdyp_status vdp_status socket_1 s1_in_1.level s1_in_2.level socket_2 socket_3 s3_in_1.level s3_in_2.level socket_4 s4_in_1.level s4_in_2.level socket_5 s5_in_1.level s5_in_2.level socket_6")
+
+rdyp = Output(15)
+en3 = Output(12)
+en3.on()
+rdyp.on()

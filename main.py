@@ -17,6 +17,7 @@ if is_real:
     robot_brain = rosys.hardware.RobotBrain(communication, lizard_startup='hardware/startup_tester.liz')
     hardware_manager = HardwareManager(robot_brain)
     if communication.device_path == '/dev/ttyTHS0':
+        # robot_brain.lizard_firmware.flash_params = ['xavier', 'nand']
         robot_brain.lizard_firmware.flash_params = ['xavier']
 
 
