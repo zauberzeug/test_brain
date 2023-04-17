@@ -1,4 +1,5 @@
 import logging
+from pathlib import Path
 
 import rosys
 from nicegui import ui
@@ -7,12 +8,13 @@ import modules
 
 
 class HardwareManager():
-    def __init__(self, robot_brain: rosys.hardware.RobotBrain) -> None:
+    def __init__(self, robot_brain: rosys.hardware.RobotBrain, lizard_startup: str) -> None:
 
         self.UPDATED = rosys.event.Event()
         '''the hardware state has been updated'''
-
+        self.lizard_startup = Path(lizard_startup)
         self.robot_brain = robot_brain
+        self.robot_brain.lizard_code = self.generate_lizard_code()
         self.sockets = {
             1: 'none',
             2: 'none',
@@ -37,6 +39,13 @@ class HardwareManager():
         self.log = logging.getLogger('test_brain.hardware_manager')
 
         rosys.on_repeat(self.update, 0.01)
+
+    def generate_lizard_code(self) -> str:
+        if not self.lizard_startup.exists():
+            rosys.notify('No Lizard startup file found')
+            return
+        code = self.lizard_startup.read_text()
+        return code
 
     async def set_sockets(self) -> None:
         self.log.info(f'my socket names are {self.sockets}')

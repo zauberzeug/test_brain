@@ -14,8 +14,9 @@ rosys.hardware.SerialCommunication.search_paths.insert(0, '/dev/ttyTHS0')
 is_real = rosys.hardware.SerialCommunication.is_possible()
 if is_real:
     communication = rosys.hardware.SerialCommunication()
-    robot_brain = rosys.hardware.RobotBrain(communication, lizard_startup='hardware/startup_tester.liz')
-    hardware_manager = HardwareManager(robot_brain)
+    robot_brain = rosys.hardware.RobotBrain(communication)
+    hardware_manager = HardwareManager(robot_brain, lizard_startup='hardware/startup_rb11.liz')
+    robot_brain.lizard_firmware.flash_params = ['nand']
     if communication.device_path == '/dev/ttyTHS0':
         # robot_brain.lizard_firmware.flash_params = ['xavier', 'nand']
         robot_brain.lizard_firmware.flash_params = ['xavier']
