@@ -7,14 +7,18 @@ services:
       - ~/.rosys:/root/.rosys
       - ./../rosys:/rosys
       - ./../nicegui/nicegui:/usr/local/lib/python3.11/site-packages/nicegui
-      - ~/data:/data
+    devices:
+      - "/dev/bus/usb/001/*:/dev/bus/usb/001/*"
     network_mode: host
     restart: always
     privileged: true
     environment:
       - ROBOT_ID=Test Brain
       - TZ=Europe/Amsterdam
+
     hostname: docker
+    build:
+      context: ./
     cap_add:
       - SYS_NICE # allow container to set process priorities
     logging:

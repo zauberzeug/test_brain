@@ -15,6 +15,8 @@ class HardwareManager():
         self.lizard_startup = Path(lizard_startup)
         self.robot_brain = robot_brain
         self.robot_brain.lizard_code = self.generate_lizard_code()
+        self.rdyp = True
+        self.en3 = True
         self.sockets = {
             1: 'none',
             2: 'none',
@@ -46,6 +48,22 @@ class HardwareManager():
             return
         code = self.lizard_startup.read_text()
         return code
+
+    async def set_en3(self) -> None:
+        if self.en3 == True:
+            self.log.info('en3 on')
+            await self.robot_brain.send('en3.on()')
+        else:
+            self.log.info('en3 off')
+            await self.robot_brain.send('en3.off()')
+
+    async def set_rdyp(self, value: bool) -> None:
+        if self.rdyp == True:
+            self.log.info('rdyp on')
+            await self.robot_brain.send('rdyp.on()')
+        else:
+            self.log.info('rdyp off')
+            await self.robot_brain.send('rdyp.off()')
 
     async def set_sockets(self) -> None:
         self.log.info(f'my socket names are {self.sockets}')
