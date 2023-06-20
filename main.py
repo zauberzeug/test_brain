@@ -1,16 +1,11 @@
 #!/usr/bin/env python3
-import asyncio
-import functools
 import os
 
-import odrive
 import rosys
 from nicegui import app, ui
 
 import log
-import modules
 from hardware import HardwareManager
-from odrive_ui import odrive_ui
 
 log = log.configure()
 
@@ -22,17 +17,11 @@ async def startup() -> None:
     if is_real:
         communication = rosys.hardware.SerialCommunication()
         robot_brain = rosys.hardware.RobotBrain(communication)
-        hardware_manager = HardwareManager(robot_brain, lizard_startup='hardware/motor_test.liz')
-        # robot_brain.lizard_firmware.flash_params = ['nand'] # for old robot brains without xavier add this line (z34)
+        hardware_manager = HardwareManager(robot_brain, lizard_startup='hardware/startup_rb26.liz')
+        # robot_brain.lizard_firmware.flash_params = ['nand'] # for old robot brains without xavier but with nand add this line (z34)
         if communication.device_path == '/dev/ttyTHS0':
             # robot_brain.lizard_firmware.flash_params = ['xavier', 'nand']
             robot_brain.lizard_firmware.flash_params = ['xavier']
-    # try:
-    #     odrv = await rosys.run.io_bound(odrive.find_any, timeout=15)
-    # except TimeoutError:
-    #     odrv = None
-    # if odrv is None:
-    #     log.error('No odrive found!')
 
     @ui.page('/')
     async def main_page():
@@ -98,11 +87,6 @@ async def startup() -> None:
                         ui.timer(1, lambda: robot_status.set_content(
                             f'rdyp: {hardware_manager.rdyp_status}<br>vdp: {hardware_manager.vdp_status}'
                         ))
-
-    # @ui.page('/odrive')
-    # async def odrive_page():
-    #     message = ui.markdown('hello')
-    #     # odrive_ui(odrv)
 
 
 app.on_startup(startup)
