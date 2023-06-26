@@ -19,11 +19,12 @@ s2_in_2 = Input(13)
 str socket_2 = "oogiir_v06"
 
 # Socket 3 can_v04
-s3_can = Can(32, 33, 1000000)
-s3_can.unmute()
-s3_out_1 = p0.Output(2)
-s3_in_1 = p0.Input(14)
-str socket_3 = "can_v04"
+# s3_can = Can(32, 33, 1000000)
+# s3_can.unmute()
+# s3_out_1 = p0.Output(2)
+# s3_in_1 = p0.Input(14)
+# str socket_3 = "can_v04"
+str socket_3 = "none"
 
 # Socket 4 oogiir_v06
 s4_out_1 = p0.Output(5)
@@ -49,7 +50,7 @@ str socket_6 = "oogiir_v06"
 rdyp_status = Input(39)
 vdp_status = p0.Input(39)
 
-core.output("core.millis rdyp_status.level vdp_status.level socket_1 s1_in_1.level socket_2 s2_in_1.level s2_in_2.level socket_3 s3_in_1.level socket_4 s4_in_1.level s4_in_2.level socket_5 s5_in_1.level s5_in_2.level socket_6 s6_in_1.level s6_in_2.level")
+core.output("core.millis rdyp_status.level vdp_status.level socket_1 s1_in_1.level socket_2 s2_in_1.level s2_in_2.level socket_3 socket_4 s4_in_1.level s4_in_2.level socket_5 s5_in_1.level s5_in_2.level socket_6 s6_in_1.level s6_in_2.level")
 
 rdyp = Output(15)
 en3 = Output(12)
