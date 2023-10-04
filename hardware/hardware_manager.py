@@ -88,6 +88,8 @@ class HardwareManager():
                 self.modules[socket-1] = modules.Oiio(socket, self.robot_brain)
             if name == 'rs485_v03':
                 self.modules[socket-1] = modules.Rs485V03(socket, self.robot_brain)
+            if name == 'oogoir_v02':
+                self.modules[socket-1] = modules.OogoirV02(socket, self.robot_brain)
         self.sockets_set = True
         self.log.info(f'my modules are {self.modules} ')
 
@@ -190,6 +192,14 @@ class HardwareManager():
                             self.modules[socket-1].in_2_status = int(words.pop(0)) == 1
                         else:
                             words.pop(0)
+                            words.pop(0)
+
+                    elif words[0] == '"oogoir_v02"':
+                        self.sockets[socket] = 'oogoir_v02'
+                        words.pop(0)
+                        if self.sockets_set:
+                            self.modules[socket-1].in_1_status = int(words.pop(0)) == 1
+                        else:
                             words.pop(0)
 
             if line.startswith('can', 3) or line.startswith('p0: can', 7):
