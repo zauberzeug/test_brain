@@ -16,4 +16,4 @@ class Module(abc.ABC):
         await self.robot_brain.send(f's{self.socket}_can.send(0x{self.socket}00, 1, 2, 3, 4, 5, 6, 7, 8)')
 
     async def send_rs485(self):
-        await self.robot_brain.send(f's{self.socket}_rs485.send(1, 2, 3, 4, 5, 6, 7, 8)')
+        await self.robot_brain.send(f's{self.socket}_rs485.send(0xdd, 0xa5, 0x03, 0x00, 0xff, 0xfd, 0x77)')
