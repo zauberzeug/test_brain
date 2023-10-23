@@ -21,8 +21,9 @@ async def startup() -> None:
         # for old robot brains without xavier but with nand add this line (z34)
         # robot_brain.lizard_firmware.flash_params = ['nand']
         if communication.device_path == '/dev/ttyTHS0':
+            robot_brain.lizard_firmware.flash_params = ['orin']
             # robot_brain.lizard_firmware.flash_params = ['xavier', 'nand']
-            robot_brain.lizard_firmware.flash_params = ['xavier']
+            # robot_brain.lizard_firmware.flash_params = ['xavier']
 
     @ui.page('/')
     async def main_page():
