@@ -1,6 +1,7 @@
 from .bumper_v02 import BumperV02
 from .can_v03 import CanV03
 from .can_v04 import CanV04
+from .iigiir_v01 import IigiirV01
 from .module import Module
 from .oiio import Oiio
 from .oogiir_v05 import OogiirV05
