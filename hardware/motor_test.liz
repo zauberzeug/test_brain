@@ -1,5 +1,5 @@
 can = Can(32, 33, 1000000)
-m = ODriveMotor(can, 0x100)
+m = ODriveMotor(can, 0x500)
 m.m_per_tick = 0.05771
 m.reversed = true
 
