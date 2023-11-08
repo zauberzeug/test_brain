@@ -18,7 +18,7 @@ async def startup() -> None:
         communication = rosys.hardware.SerialCommunication()
         robot_brain = rosys.hardware.RobotBrain(communication)
         hardware_manager = HardwareManager(robot_brain, lizard_startup='hardware/startup_rb28.liz')
-        # for old robot brains without xavier but with nand add this line (z34)
+        # for old robot brains without xavier/orin but with nand add this line (z34)
         # robot_brain.lizard_firmware.flash_params = ['nand']
         if communication.device_path == '/dev/ttyTHS0':
             robot_brain.lizard_firmware.flash_params = ['orin']
@@ -76,13 +76,13 @@ async def startup() -> None:
                             with ui.column():
                                 robot_brain.communication.debug_ui()
                             with ui.column():
-                                ui.markdown(f'**Hardware Manager**').classes('col-grow')
+                                ui.markdown('**Hardware Manager**').classes('col-grow')
                                 robot_status = ui.markdown()
 
-                                en3_switch = ui.switch(
+                                ui.switch(
                                     'en3', value=True, on_change=hardware_manager.set_en3).bind_value_to(
                                     hardware_manager, 'en3')
-                                rdyp_switch = ui.switch(
+                                ui.switch(
                                     'rdyp', value=True, on_change=hardware_manager.set_rdyp).bind_value_to(
                                     hardware_manager, 'rdyp')
                                 ui.button('Reset Lizard', on_click=robot_brain.restart)
