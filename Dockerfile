@@ -1,4 +1,4 @@
-FROM zauberzeug/rosys:0.8.2
+FROM zauberzeug/rosys:latest
 
 RUN apt-get update && apt-get install -y libusb-1.0-0 libusb-1.0-0-dev && rm -rf /var/lib/apt/lists/*
 
