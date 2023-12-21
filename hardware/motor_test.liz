@@ -1,8 +1,13 @@
-can = Can(32, 33, 1000000)
-m = ODriveMotor(can, 0x500)
-m.m_per_tick = 0.05771
-m.reversed = true
+bluetooth = Bluetooth("Test Brain")
 
+can = Can(32, 33, 1000000)
+m = ODriveMotor(can, 0x100)
+m1 = ODriveMotor(can, 0x000)
+wheels = ODriveWheels(m, m1)
+m.m_per_tick = 0.1
+m1.m_per_tick = 0.1
+m.reversed = true
+m1.reversed = false
 # Socket 1 None
 str socket_1 = "none"
 

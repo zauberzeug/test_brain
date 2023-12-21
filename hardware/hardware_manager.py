@@ -15,6 +15,7 @@ class HardwareManager():
         self.lizard_startup = Path(lizard_startup)
         self.robot_brain = robot_brain
         self.robot_brain.lizard_code = self.generate_lizard_code()
+        self.heap = 0.0
         self.rdyp = True
         self.en3 = True
         self.sockets = {
@@ -103,6 +104,8 @@ class HardwareManager():
             if words[0] == 'core':
                 words.pop(0)
                 words.pop(0)
+
+                self.heap = float(words.pop(0))
 
                 self.rdyp_status = int(words.pop(0)) == 0
                 self.vdp_status = int(words.pop(0)) == 0
