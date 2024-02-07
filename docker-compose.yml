@@ -5,6 +5,7 @@ services:
     volumes:
       - ./:/app
       - ~/.rosys:/root/.rosys
+      - ./../lizard:/root/.lizard
       - ./../rosys:/rosys
       - ./../nicegui/nicegui:/usr/local/lib/python3.11/site-packages/nicegui
     devices:
