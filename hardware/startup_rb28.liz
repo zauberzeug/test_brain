@@ -1,6 +1,6 @@
 
-#startup.liz for rb28
-bluetooth = Bluetooth("Robot Brain28")
+#startup.liz for rb28 (rb32)
+bluetooth = Bluetooth("Robot Brain32")
 
 # Expander Socket 1 rs485_v04
 serial = Serial(26, 27, 115200, 1)
@@ -50,7 +50,7 @@ str socket_6 = "bumper_v02"
 rdyp_status = Input(39)
 vdp_status = p0.Input(39)
 
-core.output("core.millis rdyp_status.level vdp_status.level socket_1 s1_in_1.level socket_2 s2_in_1.level s2_in_2.level socket_3 s3_in_1.level socket_4 s4_in_1.level s4_in_2.level s4_in_3.level s4_in_4.level socket_5 s5_in_1.level s5_in_2.level s5_in_3.level s5_in_4.level socket_6 s6_in_1.level s6_in_2.level s6_in_3.level s6_in_4.level")
+core.output("core.millis core.heap rdyp_status.level vdp_status.level socket_1 s1_in_1.level socket_2 s2_in_1.level s2_in_2.level socket_3 s3_in_1.level socket_4 s4_in_1.level s4_in_2.level s4_in_3.level s4_in_4.level socket_5 s5_in_1.level s5_in_2.level s5_in_3.level s5_in_4.level socket_6 s6_in_1.level s6_in_2.level s6_in_3.level s6_in_4.level")
 
 rdyp = Output(15)
 en3 = Output(12)
