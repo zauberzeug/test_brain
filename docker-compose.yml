@@ -6,8 +6,8 @@ services:
       - ./:/app
       - ~/.rosys:/root/.rosys
       - ./../lizard:/root/.lizard
-      - ./../rosys:/rosys
-      - ./../nicegui/nicegui:/usr/local/lib/python3.11/site-packages/nicegui
+      # - ./../rosys:/rosys
+      # - ./../nicegui/nicegui:/usr/local/lib/python3.11/site-packages/nicegui
     devices:
       - "/dev/bus/usb/001/*:/dev/bus/usb/001/*"
     network_mode: host
