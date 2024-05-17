@@ -6,8 +6,8 @@ serial = Serial(26, 27, 115200, 1)
 p0 = Expander(serial, 25, 14)
 s1_rs485 = p0.Serial(26, 27, 9600, 2)
 s1_rs485.unmute()
-s1_in_1 = p0.Input(13)
 s1_out_1 = p0.Output(15)
+s1_in_1 = p0.Input(13)
 str socket_1 = "rs485_v04"
 
 # Socket 2 iigiir_v01
@@ -15,7 +15,7 @@ s2_in_1 = Input(13)
 s2_in_2 = Input(4)
 s2_in_3 = Input(36)
 s2_in_4 = Input(5)
-str socket_2 = iigiir_v01
+str socket_2 = "iigiir_v01"
 
 # Socket 3 CAN V04
 s3_can = Can(32, 33, 1000000)
@@ -48,7 +48,7 @@ str socket_6 = "oogiir_v06"
 rdyp_status = Input(39)
 vdp_status = p0.Input(39)
 
-core.output("core.millis rdyp_status.level vdp_status.level socket_1 s1_in_1.level socket_2 s2_in_1.level s2_in_2.level s2_in_3.level s2_in_4.level socket_3 s3_in_1.level socket_4 s4_in_1.level s4_in_2.level s4_in_3.level s4_in_4.level socket_5 s5_in_1.level s5_in_2.level socket_6 s6_in_1.level s6_in_2.level")
+core.output("core.millis core.heap rdyp_status.level vdp_status.level socket_1 s1_in_1.level socket_2 s2_in_1.level s2_in_2.level s2_in_3.level s2_in_4.level socket_3 s3_in_1.level socket_4 s4_in_1.level s4_in_2.level s4_in_3.level s4_in_4.level socket_5 s5_in_1.level s5_in_2.level socket_6 s6_in_1.level s6_in_2.level")
 
 rdyp = Output(15)
 en3 = Output(12)
