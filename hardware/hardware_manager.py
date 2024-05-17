@@ -101,7 +101,7 @@ class HardwareManager():
             words = line.split()
 
             # core
-            if words[0] == 'core':
+            if words[0] == 'core' or words[0] == 'p0':
                 words.pop(0)
                 words.pop(0)
 
@@ -221,7 +221,7 @@ class HardwareManager():
                             words.pop(0)
                             words.pop(0)
 
-            if line.startswith('can', 3) or line.startswith('p0: can', 7):
+            if line.startswith('can', 3) or line.startswith('can', 7):
                 for socket, name in self.sockets.items():
                     if name == 'can_v04' or name == 'can_v03':
                         await self.modules[socket-1].read_can(line)
