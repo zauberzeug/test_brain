@@ -41,7 +41,7 @@ str socket_6 = "oiio"
 int rdyp_status = 1
 int vdp_status = 1
 
-core.output("core.millis rdyp_status vdp_status socket_1 s1_in_1.level s1_in_2.level socket_2 s2_in_1.level s2_in_2.level socket_3 s3_in_1.level s3_in_2.level socket_4 socket_5 socket_6 s6_in_1.level s6_in_2.level")
+core.output("core.millis core.heap rdyp_status vdp_status socket_1 s1_in_1.level s1_in_2.level socket_2 s2_in_1.level s2_in_2.level socket_3 s3_in_1.level s3_in_2.level socket_4 socket_5 socket_6 s6_in_1.level s6_in_2.level")
 
 rdyp = Output(15)
 en3 = Output(12)

@@ -133,6 +133,16 @@ class HardwareManager():
                             words.pop(0)
                             words.pop(0)
 
+                    elif words[0] == '"can_v03"':
+                        self.sockets[socket] = 'can_v03'
+                        words.pop(0)
+                        if self.sockets_set:
+                            self.modules[socket-1].in_1_status = int(words.pop(0)) == 1
+                            self.modules[socket-1].in_2_status = int(words.pop(0)) == 1
+                        else:
+                            words.pop(0)
+                            words.pop(0)
+
                     elif words[0] == '"can_v04"':
                         self.sockets[socket] = 'can_v04'
                         words.pop(0)
@@ -158,16 +168,6 @@ class HardwareManager():
                     elif words[0] == '"none"':
                         self.sockets[socket] = 'none'
                         words.pop(0)
-
-                    elif words[0] == '"can_v03"':
-                        self.sockets[socket] = 'can_v03'
-                        words.pop(0)
-                        if self.sockets_set:
-                            self.modules[socket-1].in_1_status = int(words.pop(0)) == 1
-                            self.modules[socket-1].in_2_status = int(words.pop(0)) == 1
-                        else:
-                            words.pop(0)
-                            words.pop(0)
 
                     elif words[0] == '"oogiir_v05"':
                         self.sockets[socket] = 'oogiir_v05'

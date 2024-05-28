@@ -17,11 +17,13 @@ async def startup() -> None:
     if is_real:
         communication = rosys.hardware.SerialCommunication()
         robot_brain = rosys.hardware.RobotBrain(communication)
-        hardware_manager = HardwareManager(robot_brain, lizard_startup='hardware/startup_axis_test.liz')
+        hardware_manager = HardwareManager(robot_brain, lizard_startup='hardware/startup_rb36.liz')
         # for old robot brains without xavier/orin but with nand add this line (z34)
-        # robot_brain.lizard_firmware.flash_params = ['nand']
+        robot_brain.lizard_firmware.flash_params = ['nand']
         if communication.device_path == '/dev/ttyTHS0':
             robot_brain.lizard_firmware.flash_params = ['orin', 'v05']
+            # for new robot brians with orin and nand add this line and uncomment the previous
+            robot_brain.lizard_firmware.flash_params = ['orin', 'v05', 'nand']
             # robot_brain.lizard_firmware.flash_params = ['xavier', 'nand']
             # robot_brain.lizard_firmware.flash_params = ['xavier']
 
