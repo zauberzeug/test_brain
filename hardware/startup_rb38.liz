@@ -41,6 +41,7 @@ str socket_5 = "iigiir_v01"
 
 # Socket 6 can_v04
 s6_can = p0.Can(22,23,1000000)
+s6_can.unmute()
 s6_out_1 = p0.Output(12)
 s6_in_1 = p0.Input(25)
 str socket_6 = "can_v04"
