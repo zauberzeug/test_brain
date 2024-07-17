@@ -1,29 +1,29 @@
 
 #startup.liz for rb31
 bluetooth = Bluetooth("Robot Brain31")
-
+s3_can = Can(32, 33, 1000000)
+s3_can.unmute()
 # Expander Socket 1 rs485_v04
 serial = Serial(26, 27, 115200, 1)
 p0 = Expander(serial, 25, 14)
-s1_rs485 = p0.Serial(26, 27, 9600, 2)
+s1_rs485 = p0.Serial(26, 27, 9600, 1)
 s1_rs485.unmute()
 s1_out_1 = p0.Output(15)
 s1_in_1 = p0.Input(13)
 str socket_1 = "rs485_v04"
 
-# Socket 2 rs485_v04
-s2_rs485 = Serial(13,4,115200,3)
-s2_out_1 = Output(5)
-s2_in_1 = Input(36)
-str socket_2 = "rs485_v04"
-
 # Socket 3 can_v04
-s3_can = Can(32, 33, 1000000)
-s3_can.unmute()
+
 s3_out_1 = p0.Output(2)
 s3_in_1 = p0.Input(14)
 str socket_3 = "can_v04"
 
+# Socket 2 rs485_v04
+s2_rs485 = Serial(13,4,115200,2)
+s2_rs485.unmute()
+s2_out_1 = Output(5)
+s2_in_1 = Input(36)
+str socket_2 = "rs485_v04"
 
 # Socket 4 oogiir_v06
 s4_out_1 = p0.Output(5)
