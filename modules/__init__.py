@@ -6,6 +6,7 @@ from .module import Module
 from .oiio import Oiio
 from .oogiir_v05 import OogiirV05
 from .oogiir_v06 import OogiirV06
+from .oogiir_v07 import OogiirV07
 from .oogoir_v02 import OogoirV02
 from .oogoor_v01 import OogoorV01
 from .rs485_v03 import Rs485V03
