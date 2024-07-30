@@ -75,6 +75,8 @@ class HardwareManager():
                 self.modules[socket-1] = modules.OogoorV01(socket, self.robot_brain)
             if name == 'oogiir_v06':
                 self.modules[socket-1] = modules.OogiirV06(socket, self.robot_brain)
+            if name == 'oogiir_v07':
+                self.modules[socket-1] = modules.OogiirV07(socket, self.robot_brain)
             if name == 'can_v04':
                 self.modules[socket-1] = modules.CanV04(socket, self.robot_brain)
             if name == 'bumper_v02':
@@ -125,6 +127,16 @@ class HardwareManager():
 
                     elif words[0] == '"oogiir_v06"':
                         self.sockets[socket] = 'oogiir_v06'
+                        words.pop(0)
+                        if self.sockets_set:
+                            self.modules[socket-1].in_1_status = int(words.pop(0)) == 1
+                            self.modules[socket-1].in_2_status = int(words.pop(0)) == 1
+                        else:
+                            words.pop(0)
+                            words.pop(0)
+
+                    elif words[0] == '"oogiir_v07"':
+                        self.sockets[socket] = 'oogiir_v07'
                         words.pop(0)
                         if self.sockets_set:
                             self.modules[socket-1].in_1_status = int(words.pop(0)) == 1
