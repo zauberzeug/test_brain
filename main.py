@@ -17,15 +17,17 @@ async def startup() -> None:
     if is_real:
         communication = rosys.hardware.SerialCommunication()
         robot_brain = rosys.hardware.RobotBrain(communication)
-        hardware_manager = HardwareManager(robot_brain, lizard_startup='hardware/startup_rb37.liz')
-        # for old robot brains without xavier/orin but with nand add this line (z34)
+        # Put here correct startup lizard file
+        lizard_startup = 'hardware/startup_rb40.liz'
+        hardware_manager = HardwareManager(robot_brain, lizard_startup=lizard_startup)
+        # for old robot brains without xavier/orin but with nand add this line (z34, rb19)
         robot_brain.lizard_firmware.flash_params = ['nand']
         if communication.device_path == '/dev/ttyTHS0':
-            robot_brain.lizard_firmware.flash_params = ['orin', 'v05']
+            # robot_brain.lizard_firmware.flash_params = ['xavier']
+            # robot_brain.lizard_firmware.flash_params = ['xavier', 'nand']
+            # robot_brain.lizard_firmware.flash_params = ['orin', 'v05']
             # for new robot brians with orin and nand add this line and uncomment the previous
             robot_brain.lizard_firmware.flash_params = ['orin', 'v05', 'nand']
-            # robot_brain.lizard_firmware.flash_params = ['xavier', 'nand']
-            # robot_brain.lizard_firmware.flash_params = ['xavier']
 
     @ui.page('/')
     async def main_page():
@@ -39,9 +41,14 @@ async def startup() -> None:
         ui.colors(primary='#6E93D6', secondary='#53B689', accent='#111B1E', positive='#53B689')
 
         # navigation bar
-        with ui.header().props('elevated').classes('q-pa-xs q-pt-sm', remove='q-pa-md items-start gap-4'):
-            ui.label('Test Brain').classes(
-                'text-white text-weight-bold col-5 q-pl-md')
+        with ui.header().props('elevated').classes('q-pa-xs q-pt-sm', remove='q-pa-md items-start gap-4') as header:
+            if lizard_startup == 'hardware/startup_tester.liz':
+                header.classes('bg-secondary')
+                ui.label('Test Brain').classes(
+                    'text-white text-weight-bold col-5 q-pl-md')
+            else:
+                ui.label(f'Tested Brain').classes(
+                    'text-white text-weight-bold col-5 q-pl-md')
             with ui.row().classes('col-7 justify-end q-pr-md'):
                 if is_real:
                     ui.icon('hardware').classes('text-white')
