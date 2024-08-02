@@ -31,12 +31,12 @@ s4_out_3 = p0.Output(32)
 s4_out_4 = p0.Output(5)
 str socket_4 = "oogoor_v01"
 
-# Socket 5 BUMPER_v02
-s5_in_1 = p0.Input(19)
-s5_in_2 = p0.Input(21)
-s5_in_3 = p0.Input(35)
-s5_in_4 = p0.Input(18)
-str socket_5 = "bumper_v02"
+# Socket 5 iigiir_v01
+s5_in_1 = p0.Input(35)
+s5_in_2 = p0.Input(18)
+s5_in_3 = p0.Input(21)
+s5_in_4 = p0.Input(19)
+str socket_5 = "iigiir_v01"
 
 # Socket 6 CAN_v04
 s6_can = p0.Can(22, 23, 1000000)
