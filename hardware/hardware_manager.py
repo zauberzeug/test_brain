@@ -119,6 +119,8 @@ class HardwareManager():
                 self.vdp_status = int(words.pop(0)) == 0
 
                 for socket, name in self.sockets.items():
+                    if name != 'none' or self.modules[socket-1] is None:
+                        continue
                     if words[0] == '"rs485_v04"':
                         self.sockets[socket] = 'rs485_v04'
                         words.pop(0)
