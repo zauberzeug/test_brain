@@ -2,8 +2,6 @@ import logging
 import os
 import sys
 
-import icecream
-
 project = 'test_brain'
 
 
@@ -23,8 +21,6 @@ class PackagePathFilter(logging.Filter):
 
 
 def configure():
-    icecream.install()
-
     config = {
         'version': 1,
         'disable_existing_loggers': True,
