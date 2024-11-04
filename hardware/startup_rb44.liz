@@ -17,12 +17,12 @@ s2_in_1 = Input(36)
 s2_in_2 = Input(13)
 str socket_2 = "oogiir_v07"
 
-# Socket 3 can_v04
+# Socket 3 can_v06
 s3_can = Can(32, 33, 1000000)
 s3_can.unmute()
 s3_out_1 = p0.Output(2)
 s3_in_1 = p0.Input(14)
-str socket_3 = "can_v04"
+str socket_3 = "can_v06"
 
 # Socket 4 empty
 
