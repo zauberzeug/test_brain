@@ -71,6 +71,8 @@ class HardwareManager():
         for socket, name in self.sockets.items():
             if name == 'rs485_v04':
                 self.modules[socket-1] = modules.Rs485V04(socket, self.robot_brain)
+            if name == 'rs485_v05':
+                self.modules[socket-1] = modules.Rs485V05(socket, self.robot_brain)
             if name == 'oogoor_v01':
                 self.modules[socket-1] = modules.OogoorV01(socket, self.robot_brain)
             if name == 'oogiir_v06':
@@ -79,6 +81,8 @@ class HardwareManager():
                 self.modules[socket-1] = modules.OogiirV07(socket, self.robot_brain)
             if name == 'can_v04':
                 self.modules[socket-1] = modules.CanV04(socket, self.robot_brain)
+            if name == 'can_v06':
+                self.modules[socket-1] = modules.CanV06(socket, self.robot_brain)
             if name == 'bumper_v02':
                 self.modules[socket-1] = modules.BumperV02(socket, self.robot_brain)
             if name == 'none':
@@ -95,6 +99,8 @@ class HardwareManager():
                 self.modules[socket-1] = modules.OogoirV02(socket, self.robot_brain)
             if name == 'iigiir_v01':
                 self.modules[socket-1] = modules.IigiirV01(socket, self.robot_brain)
+            if name == 'iigiir_v02':
+                self.modules[socket-1] = modules.IigiirV02(socket, self.robot_brain)
         self.sockets_set = True
         self.log.info(f'my modules are {self.modules} ')
 
@@ -115,6 +121,14 @@ class HardwareManager():
                 for socket, name in self.sockets.items():
                     if words[0] == '"rs485_v04"':
                         self.sockets[socket] = 'rs485_v04'
+                        words.pop(0)
+                        if self.sockets_set:
+                            self.modules[socket-1].in_1_status = int(words.pop(0)) == 1
+                        else:
+                            words.pop(0)
+
+                    if words[0] == '"rs485_v05"':
+                        self.sockets[socket] = 'rs485_v05'
                         words.pop(0)
                         if self.sockets_set:
                             self.modules[socket-1].in_1_status = int(words.pop(0)) == 1
@@ -157,6 +171,14 @@ class HardwareManager():
 
                     elif words[0] == '"can_v04"':
                         self.sockets[socket] = 'can_v04'
+                        words.pop(0)
+                        if self.sockets_set:
+                            self.modules[socket-1].in_1_status = int(words.pop(0)) == 1
+                        else:
+                            words.pop(0)
+
+                    elif words[0] == '"can_v06"':
+                        self.sockets[socket] = 'can_v06'
                         words.pop(0)
                         if self.sockets_set:
                             self.modules[socket-1].in_1_status = int(words.pop(0)) == 1
@@ -221,6 +243,20 @@ class HardwareManager():
 
                     elif words[0] == '"iigiir_v01"':
                         self.sockets[socket] = 'iigiir_v01'
+                        words.pop(0)
+                        if self.sockets_set:
+                            self.modules[socket-1].in_1_status = int(words.pop(0)) == 1
+                            self.modules[socket-1].in_2_status = int(words.pop(0)) == 1
+                            self.modules[socket-1].in_3_status = int(words.pop(0)) == 1
+                            self.modules[socket-1].in_4_status = int(words.pop(0)) == 1
+                        else:
+                            words.pop(0)
+                            words.pop(0)
+                            words.pop(0)
+                            words.pop(0)
+
+                    elif words[0] == '"iigiir_v02"':
+                        self.sockets[socket] = 'iigiir_v02'
                         words.pop(0)
                         if self.sockets_set:
                             self.modules[socket-1].in_1_status = int(words.pop(0)) == 1

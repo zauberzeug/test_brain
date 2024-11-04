@@ -1,7 +1,9 @@
 from .bumper_v02 import BumperV02
 from .can_v03 import CanV03
 from .can_v04 import CanV04
+from .can_v06 import CanV06
 from .iigiir_v01 import IigiirV01
+from .iigiir_v02 import IigiirV02
 from .module import Module
 from .oiio import Oiio
 from .oogiir_v05 import OogiirV05
@@ -11,3 +13,4 @@ from .oogoir_v02 import OogoirV02
 from .oogoor_v01 import OogoorV01
 from .rs485_v03 import Rs485V03
 from .rs485_v04 import Rs485V04
+from .rs485_v05 import Rs485V05
