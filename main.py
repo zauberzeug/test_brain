@@ -3,6 +3,7 @@ import os
 
 import rosys
 from nicegui import app, ui
+from rosys.hardware import EspPins
 
 import log
 from hardware import HardwareManager
@@ -99,6 +100,13 @@ async def startup() -> None:
                         ui.timer(1, lambda: robot_status.set_content(
                             f'rdyp: {hardware_manager.rdyp_status}<br>vdp: {hardware_manager.vdp_status}'
                         ))
+            with ui.row():
+                with ui.card().style('min-width: 200px;'):
+                    esp_pins_core = EspPins(name='core', robot_brain=robot_brain)
+                    esp_pins_core.developer_ui()
+                with ui.card().style('min-width: 200px;'):
+                    esp_pins_p0 = EspPins(name='p0', robot_brain=robot_brain)
+                    esp_pins_p0.developer_ui()
 
 
 app.on_startup(startup)
