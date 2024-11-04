@@ -12,3 +12,5 @@ config.hjson
 backups/
 fleet/
 .git/
+.mypy_cache/
+.venv/
