@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 import os
 
-import rosys
-from nicegui import app, ui
-from rosys.hardware import EspPins
-
 import log
 from hardware import HardwareManager
+from nicegui import app, ui
+
+import rosys
+from rosys.hardware import EspPins
 
 log = log.configure()
 
@@ -19,7 +19,7 @@ async def startup() -> None:
         communication = rosys.hardware.SerialCommunication()
         robot_brain = rosys.hardware.RobotBrain(communication)
         # Put here correct startup lizard file
-        lizard_startup = 'hardware/startup_rb40.liz'
+        lizard_startup = 'hardware/startup_rb45.liz'
         hardware_manager = HardwareManager(robot_brain, lizard_startup=lizard_startup)
         # for old robot brains without xavier/orin but with nand add this line (z34, rb19)
         robot_brain.lizard_firmware.flash_params = ['nand']

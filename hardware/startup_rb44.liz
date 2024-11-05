@@ -30,12 +30,12 @@ str socket_3 = "can_v06"
 s5_in_1 = p0.Input(35)
 s5_in_2 = p0.Input(18)
 s5_in_3 = p0.Input(21)
-s5_in_4 = p0.Input(19) 
+s5_in_4 = p0.Input(19)
 str socket_5 = "iigiir_v02"
 
 # Socket 6 empty
 
-imu = Imu()
+# imu = Imu()
 
 rdyp_status = Input(39)
 vdp_status = p0.Input(39)
