@@ -2,7 +2,7 @@ import logging
 
 import rosys
 from nicegui import ui
-from rosys.hardware import remove_indentation
+from rosys.helpers import remove_indentation
 
 from .module import Module
 
@@ -37,15 +37,16 @@ class Bumper(Module):
             f's{self.socket}_in_2.level',
             f's{self.socket}_in_3.level',
             f's{self.socket}_in_4.level']
-
+        
+    def create_ui(self):
         with ui.card():
-            with ui.row():
-                with ui.column():
-                    with ui.row():
-                        ui.label('in_1 pin')
-                        ui.icon('highlight_off').classes('text-red').bind_visibility_from(self,
+            ui.markdown(f'**Socket {self.socket}: Bumper**')
+            with ui.column():
+                with ui.row():
+                    ui.label('in_1 pin')
+                    ui.icon('highlight_off').classes('text-red').bind_visibility_from(self,
                                                                                             'in_1_status', backward=lambda x: not x)
-                        ui.icon('check_circle_outline').classes(
+                    ui.icon('check_circle_outline').classes(
                             'text-green').bind_visibility_from(self, 'in_1_status')
                 with ui.row():
                     ui.label('in_2 pin')

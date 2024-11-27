@@ -2,7 +2,7 @@ import logging
 
 import rosys
 from nicegui import ui
-from rosys.hardware import remove_indentation
+from rosys.helpers import remove_indentation
 
 from .module import Module
 
@@ -33,7 +33,7 @@ class Oogoor(Module):
         s{self.socket}_out_4 = {"p0." if self.pin4_on_exander else ""}Output({self.pin4})
         ''')
 
-
+    def create_ui(self):
         with ui.card():
             ui.markdown(f'**Socket {self.socket}: oogoor**')
             with ui.row():
@@ -65,5 +65,16 @@ class Oogoor(Module):
         await self.send_out(4, self.out_4_value)
 
 class OogoorV01(Oogoor):
-    def __init__(self, **kwargs) -> None:
-        super().__init__(**kwargs)
+    def __init__(self, *,
+                 robot_brain: rosys.hardware.RobotBrain,
+                 socket: int,
+                 pin1: int, pin1_on_exander: bool = False,
+                 pin2: int, pin2_on_exander: bool = False,
+                 pin3: int, pin3_on_exander: bool = False,
+                 pin4: int, pin4_on_exander: bool = False) -> None:
+        super().__init__(robot_brain=robot_brain,
+                         socket=socket,
+                         pin1=pin1, pin1_on_exander=pin1_on_exander,
+                         pin2=pin2, pin2_on_exander=pin2_on_exander,
+                         pin3=pin3, pin3_on_exander=pin3_on_exander,
+                         pin4=pin4, pin4_on_exander=pin4_on_exander)

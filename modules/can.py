@@ -52,8 +52,9 @@ class CanV03(Can):
         s{self.socket}_in_1 = {"p0." if self.pin3_on_exander else ""}Input({self.pin3})
         s{self.socket}_in_2 = {"p0." if self.pin4_on_exander else ""}Input({self.pin4})
         ''')
-        self.core_message_fields = ['s{self.socket}_in_1.level', 's{self.socket}_in_2.level']
+        self.core_message_fields = [f's{self.socket}_in_1.level', f's{self.socket}_in_2.level']
 
+    def create_ui(self):
         with ui.card():
             ui.markdown(f'**Socket {self.socket}: can_v03**')
             with ui.row():
@@ -100,11 +101,12 @@ class CanV04(Can):
         self.lizard_code = remove_indentation(f'''
         s{self.socket}_can = Can({self.pin1}, {self.pin2}, 1000000)
         s{self.socket}_can.unmute()
-        s{self.socket}_in_1 = {"p0." if self.pin3_on_exander else ""}Input({self.pin3})
-        s{self.socket}_out_1 = {"p0." if self.pin4_on_exander else ""}Output({self.pin4})
+        s{self.socket}_out_1 = {"p0." if self.pin3_on_exander else ""}Output({self.pin3})
+        s{self.socket}_in_1 = {"p0." if self.pin4_on_exander else ""}Input({self.pin4})
         ''')
-        self.core_message_fields = ['s{self.socket}_in_1.level']
+        self.core_message_fields = [f's{self.socket}_in_1.level']
 
+    def create_ui(self):
         with ui.card():
             ui.markdown(f'**Socket {self.socket}: can**')
             with ui.row():

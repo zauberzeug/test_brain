@@ -2,7 +2,7 @@ import logging
 
 import rosys
 from nicegui import ui
-from rosys.hardware import remove_indentation
+from rosys.helpers import remove_indentation
 
 from .module import Module
 
@@ -50,8 +50,9 @@ class Rs485V03(Rs485):
         s{self.socket}_in_2 = {"p0." if self.pin4_on_exander else ""}Input({self.pin4})
                 ''')
         
-        self.core_message_fields = ['s{self.socket}_in_1.level', 's{self.socket}_in_2.level']
+        self.core_message_fields = [f's{self.socket}_in_1.level', f's{self.socket}_in_2.level']
 
+    def create_ui(self):
         with ui.card():
             ui.markdown(f'**Socket {self.socket}: rs485_v03**')
             with ui.row():
@@ -101,8 +102,9 @@ class Rs485V04(Rs485):
         s{self.socket}_out_1 = {"p0." if self.pin3_on_exander else ""}Output({self.pin3})
         s{self.socket}_in_1 = {"p0." if self.pin4_on_exander else ""}Input({self.pin4})
                 ''')
-        self.core_message_fields = ['s{self.socket}_in_1.level']
+        self.core_message_fields = [f's{self.socket}_in_1.level']
 
+    def create_ui(self):
         with ui.card():
             ui.markdown(f'**Socket {self.socket}: rs485_v05**')
             with ui.row():

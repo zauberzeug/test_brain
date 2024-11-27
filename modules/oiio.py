@@ -32,8 +32,9 @@ class Oiio(Module):
         s{self.socket}_out_1 = {"p0." if self.pin1_on_exander else ""}Output({self.pin1})
         s{self.socket}_out_2 = {"p0." if self.pin4_on_exander else ""}Output({self.pin4})
         ''')
-        self.core_message_fields = ['s{self.socket}_in_1.level', 's{self.socket}_in_2.level']
+        self.core_message_fields = [f's{self.socket}_in_1.level', f's{self.socket}_in_2.level']
 
+    def create_ui(self):
         with ui.card():
             ui.markdown(f'**Socket {self.socket}: oiio**')
             with ui.row():
