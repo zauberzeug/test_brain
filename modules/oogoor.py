@@ -2,20 +2,29 @@ import logging
 
 import rosys
 from nicegui import ui
+from rosys.hardware import remove_indentation
 
 from .module import Module
 
 
-class OogoorV01(Module):
-    def __init__(self, socket: int, robot_brain: rosys.hardware.RobotBrain) -> None:
-        super().__init__(socket, robot_brain)
+class Oogoor(Module):
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
         self.out_1_value = False
         self.out_2_value = False
         self.out_3_value = False
         self.out_4_value = False
-        self.log = logging.getLogger('test_brain.oogoor_v01')
+        self.log = logging.getLogger('test_brain.oogoor')
+        self.lizard_code = remove_indentation(f'''
+        s{self.socket}_out_1 = {"p0." if self.pin1_on_exander else ""}Output({self.pin1})
+        s{self.socket}_out_2 = {"p0." if self.pin2_on_exander else ""}Output({self.pin2})
+        s{self.socket}_out_3 = {"p0." if self.pin3_on_exander else ""}Output({self.pin3})
+        s{self.socket}_out_4 = {"p0." if self.pin4_on_exander else ""}Output({self.pin4})
+        ''')
+
+
         with ui.card():
-            ui.markdown(f'**Socket {self.socket}: oogoor_v01**')
+            ui.markdown(f'**Socket {self.socket}: oogoor**')
             with ui.row():
                 with ui.column():
                     with ui.row():
@@ -31,6 +40,7 @@ class OogoorV01(Module):
                         ui.label('out_4')
                         ui.switch(value=False, on_change=self.send_out_4).bind_value(self, 'out_4_value')
 
+
     async def send_out_1(self):
         await self.send_out(1, self.out_1_value)
 
@@ -42,3 +52,7 @@ class OogoorV01(Module):
 
     async def send_out_4(self):
         await self.send_out(4, self.out_4_value)
+
+class OogoorV01(Oogoor):
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
