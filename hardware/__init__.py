@@ -1,1 +1,2 @@
-from .hardware_manager import HardwareManager
+from .testbrain_hardware import TestBrain
+from .robot_brains import RobotBrains
