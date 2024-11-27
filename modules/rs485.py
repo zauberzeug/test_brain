@@ -8,8 +8,19 @@ from .module import Module
 
 
 class Rs485(Module):
-    def __init__(self, **kwargs) -> None:
-        super().__init__(**kwargs)
+    def __init__(self, *,
+                 robot_brain: rosys.hardware.RobotBrain,
+                 socket: int,
+                 pin1: int, pin1_on_exander: bool = False,
+                 pin2: int, pin2_on_exander: bool = False,
+                 pin3: int, pin3_on_exander: bool = False,
+                 pin4: int, pin4_on_exander: bool = False) -> None:
+        super().__init__(robot_brain=robot_brain,
+                         socket=socket,
+                         pin1=pin1, pin1_on_exander=pin1_on_exander,
+                         pin2=pin2, pin2_on_exander=pin2_on_exander,
+                         pin3=pin3, pin3_on_exander=pin3_on_exander,
+                         pin4=pin4, pin4_on_exander=pin4_on_exander)
         self.log = logging.getLogger('test_brain.rs485')
 
 
@@ -17,8 +28,19 @@ class Rs485(Module):
         self.rs485_log.push(msg)
 
 class Rs485V03(Rs485):
-    def __init__(self, **kwargs) -> None:
-        super().__init__(**kwargs)
+    def __init__(self, *,
+                 robot_brain: rosys.hardware.RobotBrain,
+                 socket: int,
+                 pin1: int, pin1_on_exander: bool = False,
+                 pin2: int, pin2_on_exander: bool = False,
+                 pin3: int, pin3_on_exander: bool = False,
+                 pin4: int, pin4_on_exander: bool = False) -> None:
+        super().__init__(robot_brain=robot_brain,
+                         socket=socket,
+                         pin1=pin1, pin1_on_exander=pin1_on_exander,
+                         pin2=pin2, pin2_on_exander=pin2_on_exander,
+                         pin3=pin3, pin3_on_exander=pin3_on_exander,
+                         pin4=pin4, pin4_on_exander=pin4_on_exander)
         self.in_1_status = False
         self.in_2_status = False
         self.lizard_code = remove_indentation(f'''
@@ -57,8 +79,19 @@ class Rs485V03(Rs485):
         self.in_2_status = words.pop(0) == 1
 
 class Rs485V04(Rs485):
-    def __init__(self, **kwargs) -> None:
-        super().__init__(**kwargs)
+    def __init__(self, *,
+                 robot_brain: rosys.hardware.RobotBrain,
+                 socket: int,
+                 pin1: int, pin1_on_exander: bool = False,
+                 pin2: int, pin2_on_exander: bool = False,
+                 pin3: int, pin3_on_exander: bool = False,
+                 pin4: int, pin4_on_exander: bool = False) -> None:
+        super().__init__(robot_brain=robot_brain,
+                         socket=socket,
+                         pin1=pin1, pin1_on_exander=pin1_on_exander,
+                         pin2=pin2, pin2_on_exander=pin2_on_exander,
+                         pin3=pin3, pin3_on_exander=pin3_on_exander,
+                         pin4=pin4, pin4_on_exander=pin4_on_exander)
         self.out_1_value = False
         self.in_1_status = False
         self.log = logging.getLogger('test_brain.rs485_v05')
@@ -96,5 +129,16 @@ class Rs485V04(Rs485):
         self.rs485_log.push(msg)
     
 class Rs485V05(Rs485V04):
-    def __init__(self, **kwargs) -> None:
-        super().__init__(**kwargs)
+    def __init__(self, *,
+                 robot_brain: rosys.hardware.RobotBrain,
+                 socket: int,
+                 pin1: int, pin1_on_exander: bool = False,
+                 pin2: int, pin2_on_exander: bool = False,
+                 pin3: int, pin3_on_exander: bool = False,
+                 pin4: int, pin4_on_exander: bool = False) -> None:
+        super().__init__(robot_brain=robot_brain,
+                         socket=socket,
+                         pin1=pin1, pin1_on_exander=pin1_on_exander,
+                         pin2=pin2, pin2_on_exander=pin2_on_exander,
+                         pin3=pin3, pin3_on_exander=pin3_on_exander,
+                         pin4=pin4, pin4_on_exander=pin4_on_exander)

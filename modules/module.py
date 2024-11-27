@@ -5,10 +5,10 @@ import rosys
 
 class Module(rosys.hardware.Module, abc.ABC):
     def __init__(self,*, robot_brain: rosys.hardware.RobotBrain, 
-                 pin1: int, pin1_on_exander: bool, 
-                 pin2: int, pin2_on_exander: bool, 
-                 pin3: int, pin3_on_exander: bool, 
-                 pin4: int, pin4_on_exander: bool,
+                 pin1: int, pin1_on_exander: bool = False, 
+                 pin2: int, pin2_on_exander: bool = False, 
+                 pin3: int, pin3_on_exander: bool = False, 
+                 pin4: int, pin4_on_exander: bool = False,
                  socket:int) -> None:
         self.robot_brain = robot_brain
         self.pin1 = pin1
