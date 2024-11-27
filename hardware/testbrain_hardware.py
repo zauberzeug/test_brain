@@ -48,9 +48,7 @@ class TestBrain():
         for module in self.modules:
             if module is None:
                 continue
-            print(f'module: {module.lizard_code}')
             code += module.lizard_code
-
             output_fields.extend(module.core_message_fields)
         code += remove_indentation(f'''
             rdyp_status = Input(39)

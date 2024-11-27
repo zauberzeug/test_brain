@@ -39,10 +39,7 @@ class RobotBrains:
 
     def _switch_brain(self, brain_name: str):
         brain = self.brain_configs[brain_name]
-        print(f'brain: {brain}')
-        print(f"Creating brain '{brain_name}' with {len(brain.modules)} modules")
-        for module in brain.modules:
-            print(f"  Module: {type(module).__name__}")
+
         brain.update_lizard()
         return brain
 
