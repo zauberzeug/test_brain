@@ -1,20 +1,21 @@
 import logging
-from pathlib import Path
 
 import rosys
 import rosys.hardware
 from rosys.helpers import remove_indentation
 
-from ..modules import *
-from ..modules import Can, EmptyModule, Module
+from modules import *
 
 
 class TestBrain():
     def __init__(self, robot_brain: rosys.hardware.RobotBrain, flash_params: list[str], modules: list[Module]) -> None:
-
-        self.modules = modules
         self.robot_brain = robot_brain
         self.flash_params = flash_params
+        self.modules = modules
+        print(f"TestBrain initialized with {len(modules)} modules")  # Debug-Ausgabe
+        for module in modules:
+            print(f"  Module: {type(module).__name__}")  # Debug-Ausgabe für jedes Modul
+        
         self.lizard_code = self.generate_lizard_code()
         self.robot_brain.lizard_code = self.lizard_code
         self.robot_brain.lizard_firmware.flash_params = self.flash_params
@@ -27,7 +28,12 @@ class TestBrain():
 
         self.log = logging.getLogger('test_brain.testbrain_hardware')
 
-        rosys.on_repeat(self.update, 0.01)
+        #rosys.on_repeat(self.update, 0.01)
+
+    def update_lizard(self) -> None:
+        self.lizard_code = self.generate_lizard_code()
+        self.robot_brain.lizard_code = self.lizard_code
+        self.robot_brain.lizard_firmware.flash_params = self.flash_params
 
     def generate_lizard_code(self) -> str:
         output_fields = ['core.millis','core.heap', 'rdyp.level', 'vdp.level']
@@ -38,19 +44,21 @@ class TestBrain():
             serial = Serial(26, 27, 115200, 1)
             p0 = Expander(serial, 25, 14)
             imu = Imu()
-                                  ''')
+            ''')
         for module in self.modules:
             if module is None:
                 continue
+            print(f'module: {module.lizard_code}')
             code += module.lizard_code
+
             output_fields.extend(module.core_message_fields)
         code += remove_indentation(f'''
             rdyp_status = Input(39)
             vdp_status = p0.Input(39)
             core.output("{' '.join(output_fields)}")
-        rdyp.on()
-        en3.on()
-        ''')    
+            rdyp.on()
+            en3.on()
+            ''')    
         return code
 
     def get_flash_params(self) -> list[str]:
