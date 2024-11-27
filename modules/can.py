@@ -99,7 +99,7 @@ class CanV04(Can):
         self.in_1_status = False
         self.out_1_value = False
         self.lizard_code = remove_indentation(f'''
-        s{self.socket}_can = Can({self.pin1}, {self.pin2}, 1000000)
+        s{self.socket}_can = {"p0." if (self.pin1_on_exander or self.pin2_on_exander) else ""}Can({self.pin1}, {self.pin2}, 1000000)
         s{self.socket}_can.unmute()
         s{self.socket}_out_1 = {"p0." if self.pin3_on_exander else ""}Output({self.pin3})
         s{self.socket}_in_1 = {"p0." if self.pin4_on_exander else ""}Input({self.pin4})
