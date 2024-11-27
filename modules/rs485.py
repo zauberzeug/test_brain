@@ -96,12 +96,13 @@ class Rs485V04(Rs485):
         self.out_1_value = False
         self.in_1_status = False
         self.log = logging.getLogger('test_brain.rs485_v05')
-        self.lizard_code = remove_indentation(f'''
+        self.lizard_code = remove_indentation(
+        f'''
         s{self.socket}_rs485 = p0.Serial({self.pin1}, {self.pin2}, 9600, 2)
         s{self.socket}_rs485.unmute()
         s{self.socket}_out_1 = {"p0." if self.pin3_on_exander else ""}Output({self.pin3})
         s{self.socket}_in_1 = {"p0." if self.pin4_on_exander else ""}Input({self.pin4})
-                ''')
+        ''')
         self.core_message_fields = [f's{self.socket}_in_1.level']
 
     def create_ui(self):
