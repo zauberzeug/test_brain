@@ -76,17 +76,5 @@ class Bumper(Module):
         
 
 class BumperV02(Bumper):
-    def __init__(self, *,
-                 robot_brain: rosys.hardware.RobotBrain,
-                 socket: int,
-                 pin1: int, pin1_on_exander: bool = False,
-                 pin2: int, pin2_on_exander: bool = False,
-                 pin3: int, pin3_on_exander: bool = False,
-                 pin4: int, pin4_on_exander: bool = False) -> None:
-        super().__init__(robot_brain=robot_brain,
-                         socket=socket,
-                         pin1=pin1, pin1_on_exander=pin1_on_exander,
-                         pin2=pin2, pin2_on_exander=pin2_on_exander,
-                         pin3=pin3, pin3_on_exander=pin3_on_exander,
-                         pin4=pin4, pin4_on_exander=pin4_on_exander)
+    ...
 
