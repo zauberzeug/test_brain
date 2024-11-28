@@ -48,7 +48,7 @@ class Rs485V03(Rs485):
         s{self.socket}_rs485.unmute()
         s{self.socket}_in_1 = {"p0." if self.pin3_on_exander else ""}Input({self.pin3})
         s{self.socket}_in_2 = {"p0." if self.pin4_on_exander else ""}Input({self.pin4})
-                ''')
+        ''')
         
         self.core_message_fields = [f's{self.socket}_in_1.level', f's{self.socket}_in_2.level']
 
@@ -76,8 +76,8 @@ class Rs485V03(Rs485):
                             'text-green').bind_visibility_from(self, 'in_2_status')
         
     def handle_core_output(self,words:list[str]):
-        self.in_1_status = words.pop(0) == 1
-        self.in_2_status = words.pop(0) == 1
+        self.in_1_status = int(words.pop(0)) == 1
+        self.in_2_status = int(words.pop(0)) == 1
 
 class Rs485V04(Rs485):
     def __init__(self, *,
@@ -124,6 +124,8 @@ class Rs485V04(Rs485):
                                                                                           'in_1_status', backward=lambda x: not x)
                         ui.icon('check_circle_outline').classes(
                             'text-green').bind_visibility_from(self, 'in_1_status')
+    def handle_core_output(self,words:list[str]):
+        self.in_1_status = int(words.pop(0)) == 1
 
     async def send_out_1(self):
         await self.send_out(1, self.out_1_value)

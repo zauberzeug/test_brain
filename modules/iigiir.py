@@ -71,10 +71,10 @@ class Iigiir(Module):
                             'text-green').bind_visibility_from(self, 'in_4_status')
 
     def handle_core_output(self, words: list[str]):
-        self.in_1_status = words.pop(0) == 1
-        self.in_2_status = words.pop(0) == 1
-        self.in_3_status = words.pop(0) == 1
-        self.in_4_status = words.pop(0) == 1
+        self.in_1_status = int(words.pop(0)) == 1
+        self.in_2_status = int(words.pop(0)) == 1
+        self.in_3_status = int(words.pop(0)) == 1
+        self.in_4_status = int(words.pop(0)) == 1
 
 class IigiirV01(Iigiir):
     def __init__(self, *,

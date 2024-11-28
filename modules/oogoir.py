@@ -56,7 +56,7 @@ class Oogoir(Module):
                             'text-green').bind_visibility_from(self, 'in_1_status')
 
     def handle_core_output(self, words: list[str]):
-        self.in_1_status = words.pop(0) == 1
+        self.in_1_status = int(words.pop(0)) == 1
 
     async def send_out_1(self):
         await self.send_out(1, self.out_1_value)

@@ -59,8 +59,8 @@ class Oiio(Module):
                         ui.switch(value=False, on_change=self.send_out_2).bind_value(self, 'out_2_value')
 
     def handle_core_output(self, words: list[str]):
-        self.in_1_status = words.pop(0) == 1
-        self.in_2_status = words.pop(0) == 1
+        self.in_1_status = int(words.pop(0)) == 1
+        self.in_2_status = int(words.pop(0)) == 1
 
 
     async def send_out_1(self):

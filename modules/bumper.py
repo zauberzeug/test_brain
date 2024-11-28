@@ -26,7 +26,8 @@ class Bumper(Module):
         self.in_3_status = False
         self.in_4_status = False
         self.log = logging.getLogger('test_brain.bumper_v02')
-        self.lizard_code = remove_indentation(f'''
+        self.lizard_code = remove_indentation(
+        f'''
         s{self.socket}_in_1 = {"p0." if self.pin1_on_exander else ""}Input({self.pin1})
         s{self.socket}_in_2 = {"p0." if self.pin2_on_exander else ""}Input({self.pin2})
         s{self.socket}_in_3 = {"p0." if self.pin3_on_exander else ""}Input({self.pin3})
@@ -68,10 +69,10 @@ class Bumper(Module):
                         'text-green').bind_visibility_from(self, 'in_4_status')
    
     def handle_core_output(self,words:list[str]):
-        self.in_1_status = words.pop(0) == 1
-        self.in_2_status = words.pop(0) == 1
-        self.in_3_status = words.pop(0) == 1
-        self.in_4_status = words.pop(0) == 1
+        self.in_1_status = int(words.pop(0)) == 1
+        self.in_2_status = int(words.pop(0)) == 1
+        self.in_3_status = int(words.pop(0)) == 1
+        self.in_4_status = int(words.pop(0)) == 1
         
 
 class BumperV02(Bumper):
