@@ -21,6 +21,8 @@ async def startup() -> None:
         robot_brain = rosys.hardware.RobotBrain(communication)
         robot_brains = RobotBrains(robot_brain)
         test_brain = robot_brains.current_brain
+    else:
+        log.error('No real robot brain found')
 
     @ui.page('/')
     async def main_page():
