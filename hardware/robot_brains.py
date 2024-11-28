@@ -1,11 +1,17 @@
+from typing import Any
+
+from rosys import persistence
+
 from modules import *
 
 from .testbrain_hardware import TestBrain
 
 
-class RobotBrains:
+class RobotBrains():
     def __init__(self, robot_brain):
+        super().__init__()
         self.robot_brain = robot_brain
+        self.current_brain_name = 'placeholder'
         
         self.brain_configs = {
             'placeholder': TestBrain(robot_brain, [], []),
@@ -34,12 +40,14 @@ class RobotBrains:
             ]),
             
         }
-        self.current_brain_name = 'placeholder'
-        self.current_brain = self._switch_brain('placeholder')
+        self.current_brain = self.brain_configs['placeholder']
+        self.current_brain = self._switch_brain(self.current_brain_name)
+
 
     def _switch_brain(self, brain_name: str):
+        self.current_brain.active = False
         brain = self.brain_configs[brain_name]
-
+        brain.active = True
         brain.update_lizard()
         return brain
 
@@ -47,6 +55,6 @@ class RobotBrains:
         return list(self.brain_configs.keys())
     
     def get_robot_brain(self, robot_brain_name: str):
-
+        self.current_brain_name = robot_brain_name
         self.current_brain = self._switch_brain(robot_brain_name)
         return self.current_brain
