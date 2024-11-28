@@ -19,6 +19,7 @@ class TestBrain():
         self.lizard_code = self.generate_lizard_code()
         self.robot_brain.lizard_code = self.lizard_code
         self.robot_brain.lizard_firmware.flash_params = self.flash_params
+        self.active = False
         self.heap = 0.0
         self.rdyp = True
         self.en3 = True
@@ -27,8 +28,9 @@ class TestBrain():
         self.vdp_status: bool = False
 
         self.log = logging.getLogger('test_brain.testbrain_hardware')
+        
+        rosys.on_repeat(self.update, 0.01)
 
-        #rosys.on_repeat(self.update, 0.01)
 
     def update_lizard(self) -> None:
         self.lizard_code = self.generate_lizard_code()
@@ -36,14 +38,14 @@ class TestBrain():
         self.robot_brain.lizard_firmware.flash_params = self.flash_params
 
     def generate_lizard_code(self) -> str:
-        output_fields = ['core.millis','core.heap', 'rdyp.level', 'vdp.level']
+        output_fields = ['core.millis','core.heap', 'rdyp_status.level', 'vdp_status.level']
         code = remove_indentation('''
             rdyp = Output(15)
             en3 = Output(12)
             bluetooth = Bluetooth("Test Brain")
             serial = Serial(26, 27, 115200, 1)
             p0 = Expander(serial, 25, 14)
-            imu = Imu()
+            #imu = Imu()
             ''')
         for module in self.modules:
             if module is None:
@@ -80,25 +82,31 @@ class TestBrain():
 
 
     async def update(self) -> None:
+        if not self.active:
+            return
         for time, line in await self.robot_brain.read_lines():
             words = line.split()
 
+            if line.startswith('core'):
+                words.pop(0) #pop core.output
+                words.pop(0) #pop core.millis
+                self.heap = float(words.pop(0))
+                self.rdyp_status = int(words.pop(0)) == 1
+                self.vdp_status = int(words.pop(0)) == 1
+
+                for module in self.modules:
+                    module.handle_core_output(words)
+                return
+            
             if line.startswith('can', 3) or line.startswith('can', 7):
                 for module in self.modules:
                     if module is Can:
                         await module.read_can(line)
-                        break
+                        return
 
             if line.startswith('rs485', 3) or line.startswith('rs485', 7):
                 for module in self.modules:
                     if module is Rs485:
                         await module.read_rs485(line)
-                        break
-
-        words.pop(0) #pop core.millis
-        self.heap = float(words.pop(0))
-        self.rdyp_status = words.pop(0) == '1'
-        self.vdp_status = words.pop(0) == '1'
-
-        for module in self.modules:
-            module.handle_core_output(words)
+                        return
+                    
