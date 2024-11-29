@@ -55,12 +55,11 @@ async def startup() -> None:
                         for module in test_brain.modules:
                             module.create_ui()
 
-        def update_test_brain(new_brain_name):
+        def update_test_brain(new_brain_name)->None:
             nonlocal test_brain
             brain_name = str(new_brain_name.value)
-            print(f'Switching to brain: {brain_name}')
+            print(f'Switching to brain: {brain_name} from {robot_brains.current_brain_name}')
             test_brain = robot_brains.get_robot_brain(brain_name)
-            print(f'New test_brain has {len(test_brain.modules)} modules')
             update_module_ui()
 
         with ui.column().classes('w-full no-wrap items-stretch q-px-md'):
