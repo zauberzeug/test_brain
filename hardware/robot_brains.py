@@ -2,18 +2,32 @@ from typing import Any
 
 from rosys import persistence
 
-from modules import *
+from modules import (
+    BumperV02,
+    CanV03,
+    CanV04,
+    CanV06,
+    IigiirV01,
+    IigiirV02,
+    OogiirV06,
+    OogiirV07,
+    OogoorV01,
+    Rs485V03,
+    Rs485V04,
+    Rs485V05,
+)
 
 from .testbrain_hardware import TestBrain
 
 
 class RobotBrains(persistence.PersistentModule):
     def __init__(self, robot_brain):
-        print("Initializing RobotBrains")
+        print('Initializing RobotBrains')
         super().__init__()
         self.robot_brain = robot_brain
         self.current_brain_name = 'No brain selected'
-        
+
+
         self.brain_configs = {
             'No brain selected': TestBrain(robot_brain, [], []),
             'rb12': TestBrain(robot_brain, ['nand'],[
@@ -40,25 +54,25 @@ class RobotBrains(persistence.PersistentModule):
                 BumperV02(robot_brain=robot_brain,socket=6,pin1=12,pin1_on_exander=True,pin2=25,pin2_on_exander=True,pin3=22,pin3_on_exander=True,pin4=23,pin4_on_exander=True)
             ]),
         }
-        
+
         self.current_brain = self.brain_configs[self.current_brain_name]
-        print(f"Initial brain set to: {self.current_brain_name}")
+        print(f'Initial brain set to: {self.current_brain_name}')
 
     def restore(self, data: dict[str, Any]) -> None:
-        print(f"Restoring data: {data}")
+        print(f'Restoring data: {data}')
         saved_brain = data.get('current_brain_name', 'placeholder')
-        print(f"Found saved brain: {saved_brain}")
+        print(f'Found saved brain: {saved_brain}')
         if saved_brain in self.brain_configs:
             self.current_brain_name = saved_brain
             self.current_brain = self._switch_brain(self.current_brain_name)
-            print(f"Restored brain to: {self.current_brain_name}")
+            print(f'Restored brain to: {self.current_brain_name}')
         else:
             self.current_brain_name = 'placeholder'
             self.current_brain = self._switch_brain('placeholder')
-            print("Fallback to placeholder")
+            print('Fallback to placeholder')
 
     def backup(self) -> dict[str, Any]:
-        print(f"Backing up brain: {self.current_brain_name}")
+        print(f'Backing up brain: {self.current_brain_name}')
         return {
             'current_brain_name': self.current_brain_name
         }
@@ -72,8 +86,8 @@ class RobotBrains(persistence.PersistentModule):
 
     def get_robot_brain_list(self):
         return list(self.brain_configs.keys())
-    
-    
+
+
     def get_robot_brain(self, robot_brain_name: str):
         self.current_brain_name = robot_brain_name
         self.current_brain = self._switch_brain(robot_brain_name)

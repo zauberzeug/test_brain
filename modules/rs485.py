@@ -23,9 +23,9 @@ class Rs485(Module):
                          pin4=pin4, pin4_on_exander=pin4_on_exander)
         self.log = logging.getLogger('test_brain.rs485')
 
-
     async def read_rs485(self, msg: str):
-        self.rs485_log.push(msg)
+        pass
+
 
 class Rs485V03(Rs485):
     def __init__(self, *,
@@ -49,7 +49,7 @@ class Rs485V03(Rs485):
         s{self.socket}_in_1 = {"p0." if self.pin3_on_exander else ""}Input({self.pin3})
         s{self.socket}_in_2 = {"p0." if self.pin4_on_exander else ""}Input({self.pin4})
         ''')
-        
+
         self.core_message_fields = [f's{self.socket}_in_1.level', f's{self.socket}_in_2.level']
 
     def create_ui(self):
@@ -74,10 +74,13 @@ class Rs485V03(Rs485):
                                                                                           'in_2_status', backward=lambda x: not x)
                         ui.icon('check_circle_outline').classes(
                             'text-green').bind_visibility_from(self, 'in_2_status')
-        
+
     def handle_core_output(self,words:list[str]):
         self.in_1_status = int(words.pop(0)) == 1
         self.in_2_status = int(words.pop(0)) == 1
+
+    async def read_rs485(self, msg: str):
+        self.rs485_log.push(msg)
 
 class Rs485V04(Rs485):
     def __init__(self, *,
@@ -132,6 +135,6 @@ class Rs485V04(Rs485):
 
     async def read_rs485(self, msg: str):
         self.rs485_log.push(msg)
-    
+
 class Rs485V05(Rs485V04):
     ...

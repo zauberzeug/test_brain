@@ -21,11 +21,12 @@ class Can(Module):
                          pin3=pin3, pin3_on_exander=pin3_on_exander,
                          pin4=pin4, pin4_on_exander=pin4_on_exander)
 
+    async def read_can(self, msg: str):
+        pass
+
     def handle_core_output(self,words:list[str]):
         ...
 
-    async def read_can(self, msg: str):
-        self.can_log.push(msg)
 
 
 
@@ -75,11 +76,13 @@ class CanV03(Can):
                                                                                           'in_2_status', backward=lambda x: not x)
                     ui.icon('check_circle_outline').classes(
                         'text-green').bind_visibility_from(self, 'in_2_status')
-                    
+
     def handle_core_output(self,words:list[str]):
         self.in_1_status = int(words.pop(0)) == 1
         self.in_2_status = int(words.pop(0)) == 1
-    
+
+    async def read_can(self, msg: str):
+        self.can_log.push(msg)
 
 class CanV04(Can):
     def __init__(self, *,
@@ -131,6 +134,8 @@ class CanV04(Can):
     async def send_out_1(self):
         await self.send_out(1, self.out_1_value)
 
+    async def read_can(self, msg: str):
+        self.can_log.push(msg)
+
 class CanV06(CanV04):
     ...
-

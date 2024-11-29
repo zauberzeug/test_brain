@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import argparse
 
-from livesync import Folder, sync
-from livesync.run_subprocess import run_subprocess
+from livesync import Folder, sync  # type: ignore
+from livesync.run_subprocess import run_subprocess  # type: ignore
 
 parser = argparse.ArgumentParser(description='Sync local code with robot.')
 parser.add_argument('robot', help='Robot hostname')

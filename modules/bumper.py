@@ -38,7 +38,7 @@ class Bumper(Module):
             f's{self.socket}_in_2.level',
             f's{self.socket}_in_3.level',
             f's{self.socket}_in_4.level']
-        
+
     def create_ui(self):
         with ui.card():
             ui.markdown(f'**Socket {self.socket}: Bumper**')
@@ -67,14 +67,13 @@ class Bumper(Module):
                                                                                         'in_4_status', backward=lambda x: not x)
                     ui.icon('check_circle_outline').classes(
                         'text-green').bind_visibility_from(self, 'in_4_status')
-   
+
     def handle_core_output(self,words:list[str]):
         self.in_1_status = int(words.pop(0)) == 1
         self.in_2_status = int(words.pop(0)) == 1
         self.in_3_status = int(words.pop(0)) == 1
         self.in_4_status = int(words.pop(0)) == 1
-        
+
 
 class BumperV02(Bumper):
     ...
-

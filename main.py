@@ -6,8 +6,7 @@ from nicegui import app, ui
 from rosys.hardware import EspPins
 
 import log
-from hardware import RobotBrains, TestBrain
-from modules import *
+from hardware import RobotBrains
 
 log = log.configure()
 
@@ -21,8 +20,6 @@ async def startup() -> None:
         robot_brain = rosys.hardware.RobotBrain(communication)
         robot_brains = RobotBrains(robot_brain)
         test_brain = robot_brains.current_brain
-    else:
-        log.error('No real robot brain found')
 
     @ui.page('/')
     async def main_page():
@@ -30,7 +27,7 @@ async def startup() -> None:
         ui.colors(primary='#6E93D6', secondary='#53B689', accent='#111B1E', positive='#53B689')
 
         # navigation bar
-        with ui.header().props('elevated').classes('q-pa-xs q-pt-sm', remove='q-pa-md items-start gap-4') as header:
+        with ui.header().props('elevated').classes('q-pa-xs q-pt-sm', remove='q-pa-md items-start gap-4'):
 
             with ui.row().classes('col-7 justify-end q-pr-md'):
                 if is_real:
@@ -50,22 +47,20 @@ async def startup() -> None:
 
         def update_module_ui():
             module_container.clear()
-            print(f"Updating UI with {len(test_brain.modules)} modules")
             with module_container:
                 with ui.row().classes('items-stretch justify-start').style('gap: 1rem; flex-wrap: wrap'):
                     if not test_brain.modules:
                         ui.label('No modules configured for this brain').classes('text-h6')
                     else:
                         for module in test_brain.modules:
-                            print(f"Creating UI for module: {type(module).__name__}")
                             module.create_ui()
 
         def update_test_brain(new_brain_name):
             nonlocal test_brain
             brain_name = str(new_brain_name.value)
-            print(f"Switching to brain: {brain_name}")
+            print(f'Switching to brain: {brain_name}')
             test_brain = robot_brains.get_robot_brain(brain_name)
-            print(f"New test_brain has {len(test_brain.modules)} modules")
+            print(f'New test_brain has {len(test_brain.modules)} modules')
             update_module_ui()
 
         with ui.column().classes('w-full no-wrap items-stretch q-px-md'):
@@ -94,7 +89,7 @@ async def startup() -> None:
                                     'en3', value=True, on_change=test_brain.set_en3).bind_value_to(
                                     test_brain, 'en3')
                                 ui.switch(
-                                    'rdyp', value=True, on_change=test_brain.set_rdyp).bind_value_to(
+                                    'rdyp', value=True, on_change=lambda e: test_brain.set_rdyp()).bind_value_to(
                                     test_brain, 'rdyp')
                                 ui.button('Reset Lizard', on_click=robot_brain.restart)
                         ui.timer(1, lambda: robot_status.set_content(

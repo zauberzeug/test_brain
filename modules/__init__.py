@@ -8,4 +8,4 @@ from .oogoir import Oogoir, OogoirV02
 from .oogoor import Oogoor, OogoorV01
 from .rs485 import Rs485, Rs485V03, Rs485V04, Rs485V05
 
-__all__ = ['EmptyModule', 'Module', 'BumperV02', 'Can', 'CanV03', 'CanV04', 'CanV06', 'Iigiir', 'IigiirV01', 'IigiirV02', 'Oiio', 'Oogiir', 'OogiirV05', 'OogiirV06', 'OogiirV07', 'Oogoir', 'OogoirV02', 'Oogoor', 'OogoorV01', 'Rs485', 'Rs485V04', 'Rs485V05', 'Rs485V03']
+__all__ = ['BumperV02', 'Can', 'CanV03', 'CanV04', 'CanV06', 'EmptyModule', 'Iigiir', 'IigiirV01', 'IigiirV02', 'Module', 'Oiio', 'Oogiir', 'OogiirV05', 'OogiirV06', 'OogiirV07', 'Oogoir', 'OogoirV02', 'Oogoor', 'OogoorV01', 'Rs485', 'Rs485V03', 'Rs485V04', 'Rs485V05']
