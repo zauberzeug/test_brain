@@ -55,6 +55,11 @@ def configure():
                 'level': 'WARN',
                 'propagate': False,
             },
+             'nicegui': {
+        'handlers': ['debugfile'],
+        'level': 'ERROR',
+                'propagate': False,
+            },
             'rosys.communication': {
                 'handlers': ['communicationfile'],
                 'level': 'DEBUG',
