@@ -137,5 +137,8 @@ class CanV04(Can):
     async def read_can(self, msg: str):
         self.can_log.push(msg)
 
+class CanV05(CanV04):
+    ...
+
 class CanV06(CanV04):
     ...
