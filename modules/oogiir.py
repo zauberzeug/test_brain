@@ -68,6 +68,8 @@ class Oogiir(Module):
     async def send_out_2(self):
         await self.send_out(2, self.out_2_value)
 
+class OogiirV02mod(Oogiir):
+    ...
 class OogiirV05(Oogiir):
     ...
 
