@@ -77,3 +77,6 @@ class Bumper(Module):
 
 class BumperV02(Bumper):
     ...
+
+class BumperV03(Bumper):
+    ...
