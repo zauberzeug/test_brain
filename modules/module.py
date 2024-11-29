@@ -5,20 +5,20 @@ import rosys
 
 class Module(rosys.hardware.Module, abc.ABC):
     def __init__(self,*, robot_brain: rosys.hardware.RobotBrain,
-                 pin1: int, pin1_on_exander: bool = False,
-                 pin2: int, pin2_on_exander: bool = False,
-                 pin3: int, pin3_on_exander: bool = False,
-                 pin4: int, pin4_on_exander: bool = False,
+                 pin1: int, pin1_on_expander: bool = False,
+                 pin2: int, pin2_on_expander: bool = False,
+                 pin3: int, pin3_on_expander: bool = False,
+                 pin4: int, pin4_on_expander: bool = False,
                  socket:int) -> None:
         self.robot_brain = robot_brain
         self.pin1 = pin1
-        self.pin1_on_exander = pin1_on_exander
+        self.pin1_on_expander = pin1_on_expander
         self.pin2 = pin2
-        self.pin2_on_exander = pin2_on_exander
+        self.pin2_on_expander = pin2_on_expander
         self.pin3 = pin3
-        self.pin3_on_exander = pin3_on_exander
+        self.pin3_on_expander = pin3_on_expander
         self.pin4 = pin4
-        self.pin4_on_exander = pin4_on_exander
+        self.pin4_on_expander = pin4_on_expander
         self.socket = socket
         self.lizard_code = ''
         self.core_message_fields: list[str] = []
@@ -42,14 +42,14 @@ class Module(rosys.hardware.Module, abc.ABC):
 
 class EmptyModule(Module):
     def __init__(self,*, robot_brain: rosys.hardware.RobotBrain,
-                 pin1: int=0, pin1_on_exander: bool=False,
-                 pin2: int=0, pin2_on_exander: bool=False,
-                 pin3: int=0, pin3_on_exander: bool=False,
-                 pin4: int=0, pin4_on_exander: bool=False,
+                 pin1: int=0, pin1_on_expander: bool=False,
+                 pin2: int=0, pin2_on_expander: bool=False,
+                 pin3: int=0, pin3_on_expander: bool=False,
+                 pin4: int=0, pin4_on_expander: bool=False,
                  socket:int) -> None:
         super().__init__(robot_brain=robot_brain,
-                         pin1=pin1, pin1_on_exander=pin1_on_exander,
-                         pin2=pin2, pin2_on_exander=pin2_on_exander,
-                         pin3=pin3, pin3_on_exander=pin3_on_exander,
-                         pin4=pin4, pin4_on_exander=pin4_on_exander,
+                         pin1=pin1, pin1_on_expander=pin1_on_expander,
+                         pin2=pin2, pin2_on_expander=pin2_on_expander,
+                         pin3=pin3, pin3_on_expander=pin3_on_expander,
+                         pin4=pin4, pin4_on_expander=pin4_on_expander,
                          socket=socket)
