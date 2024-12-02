@@ -14,8 +14,6 @@ class System:
         self.log = logging.getLogger('test_brain.system')
         rosys.hardware.SerialCommunication.search_paths.insert(0, '/dev/ttyTHS0')
         self.is_real = rosys.hardware.SerialCommunication.is_possible()
-        if not self.is_real:
-            return
         self.communication = rosys.hardware.SerialCommunication()
         self.robot_brain = rosys.hardware.RobotBrain(self.communication)
         self.test_brain: TestBrain = BrainConfigs(self.robot_brain).get_brain(brain_id)
@@ -43,10 +41,10 @@ class System:
                         with ui.column():
                             self.robot_brain.communication.debug_ui()
                         with ui.column():
-                            ui.markdown('**Hardware Manager**').classes('col-grow')
-                            robot_status = ui.markdown()
-
-                            ui.label('heap:').classes('col-grow').bind_text_from(self.test_brain, 'heap')
+                            ui.label('Hardware Manger').classes('font-bold')
+                            ui.label('rdyp:').classes('col-grow').bind_text_from(self.test_brain, 'rdyp_status', backward=lambda rdyp_status: f'rdyp: {rdyp_status}')
+                            ui.label('vdp:').classes('col-grow').bind_text_from(self.test_brain, 'vdp_status', backward=lambda vdp_status: f'vdp: {vdp_status}')
+                            ui.label('heap:').classes('col-grow').bind_text_from(self.test_brain, 'heap', backward=lambda heap: f'heap: {heap}')
                             ui.switch(
                                 'en3', value=True, on_change=self.test_brain.set_en3) \
                                     .bind_value_to(self.test_brain, 'en3')
@@ -54,9 +52,6 @@ class System:
                                 'rdyp', value=True, on_change=lambda e: self.test_brain.set_rdyp()) \
                                     .bind_value_to(self.test_brain, 'rdyp')
                             ui.button('Reset Lizard', on_click=self.robot_brain.restart)
-                    ui.timer(1, lambda: robot_status \
-                             .set_content(f'rdyp: {self.test_brain.rdyp_status}<br>vdp: {self.test_brain.vdp_status}'
-                    ))
             with ui.row():
                 with ui.card().style('min-width: 200px;'):
                     esp_pins_core = EspPins(name='core', robot_brain=self.robot_brain)
