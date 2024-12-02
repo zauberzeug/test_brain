@@ -19,4 +19,4 @@ async def startup() -> None:
 
 app.on_startup(startup)
 
-ui.run(title='Test Brain', port=80, on_air='iel2PZbr1ncRU6Ji')
+ui.run(title='Test Brain', port=80)
