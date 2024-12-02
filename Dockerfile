@@ -1,7 +1,9 @@
-FROM python:3.12-bookworm
+FROM python:3.11.2-bullseye
 
-RUN apt update && apt install -y \
-    sudo vim less ack-grep rsync wget curl cmake arp-scan iproute2 iw python3-pip python3-autopep8 libgeos-dev graphviz graphviz-dev v4l-utils psmisc sysstat \
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt update && apt install -y \
+    sudo vim less ack-grep rsync wget curl cmake arp-scan iproute2 iw libgeos-dev graphviz graphviz-dev v4l-utils psmisc sysstat \
     libgl1-mesa-glx ffmpeg libsm6 libxext6 \
     avahi-utils iputils-ping \
     jq \
@@ -28,20 +30,16 @@ RUN python3 -m pip install --upgrade pip
 WORKDIR /app
 COPY requirements.txt ./
 
-RUN python3 -m pip install --user -r requirements.txt
-
-WORKDIR /root/.lizard
-RUN CURL="curl -s https://api.github.com/repos/zauberzeug/lizard/releases" && \
-    ZIP=$(eval "$CURL/latest" | jq -r '.assets[0].id') && \
-    eval "$CURL/assets/$ZIP -LJOH 'Accept: application/octet-stream'" && \
-    unzip *zip && \
-    rm *zip && \
-    ls -lha
+RUN --mount=type=cache,target=/home/zauberzeug/.cache/pip \
+    python3 -m pip install --user -r requirements.txt
 
 # for Lizard monitor
 RUN python3 -m pip install --no-cache prompt-toolkit
 
 WORKDIR /app
 COPY --chown=${USERNAME}:${USER_GID} test_brain ./test_brain/
+COPY --chown=${USERNAME}:${USER_GID} *.py ./
+
+RUN sudo setcap 'cap_net_bind_service=+ep cap_sys_nice=+ep' /usr/local/bin/python3.11
 
 CMD python3 main.py
