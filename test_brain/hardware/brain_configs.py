@@ -104,7 +104,7 @@ class BrainConfigs:
                 IigiirV01(robot_brain=robot_brain,socket=5,pin1=35,pin1_on_expander=True,pin2=18,pin2_on_expander=True,pin3=21,pin3_on_expander=True,pin4=19,pin4_on_expander=True),
                 BumperV02(robot_brain=robot_brain,socket=6,pin1=12,pin1_on_expander=True,pin2=25,pin2_on_expander=True,pin3=22,pin3_on_expander=True,pin4=23,pin4_on_expander=True)
             ]),
-            'rb30': TestBrain(robot_brain, [], [
+            'rb30': TestBrain(robot_brain, ['nand','orin','v05'], [
                 Rs485V04(robot_brain=robot_brain,socket=1,pin1=26,pin2=27,pin3=15,pin3_on_expander=True,pin4=13,pin4_on_expander=True),
                 OogiirV06(robot_brain=robot_brain,socket=2,pin1=5,pin2=4,pin3=36,pin4=13),
                 CanV05(robot_brain=robot_brain,socket=3,pin1=32,pin2=33,pin3=2,pin3_on_expander=True,pin4=14,pin4_on_expander=True),
@@ -112,7 +112,7 @@ class BrainConfigs:
                 OogiirV06(robot_brain=robot_brain,socket=5,pin1=19,pin1_on_expander=True,pin2=18,pin2_on_expander=True,pin3=21,pin3_on_expander=True,pin4=35,pin4_on_expander=True),
                 OogiirV06(robot_brain=robot_brain,socket=6,pin1=12,pin1_on_expander=True,pin2=23,pin2_on_expander=True,pin3=25,pin3_on_expander=True,pin4=22,pin4_on_expander=True)
             ]),
-            'rb31': TestBrain(robot_brain, [], [
+            'rb31': TestBrain(robot_brain, ['nand','orin','v05'], [
                 Rs485V04(robot_brain=robot_brain,socket=1,pin1=26,pin2=27,pin3=15,pin3_on_expander=True,pin4=13,pin4_on_expander=True),
                 Rs485V051(robot_brain=robot_brain,socket=2,pin1=13,pin2=4,pin3=5,pin4=15),
                 CanV05(robot_brain=robot_brain,socket=3,pin1=32,pin2=33,pin3=2,pin3_on_expander=True,pin4=14,pin4_on_expander=True),
@@ -120,7 +120,7 @@ class BrainConfigs:
                 BumperV02(robot_brain=robot_brain,socket=5,pin1=19,pin1_on_expander=True,pin2=21,pin2_on_expander=True,pin3=35,pin3_on_expander=True,pin4=18,pin4_on_expander=True),
                 OogiirV07(robot_brain=robot_brain,socket=6,pin1=12,pin1_on_expander=True,pin2=23,pin2_on_expander=True,pin3=25,pin3_on_expander=True,pin4=22,pin4_on_expander=True)
             ]),
-            'rb32': TestBrain(robot_brain, [], [
+            'rb32': TestBrain(robot_brain, ['nand','orin','v05'], [
                 Rs485V04(robot_brain=robot_brain,socket=1,pin1=26,pin2=27,pin3=15,pin3_on_expander=True,pin4=13,pin4_on_expander=True),
                 OogiirV06(robot_brain=robot_brain,socket=2,pin1=5,pin2=4,pin3=36,pin4=13),
                 CanV05(robot_brain=robot_brain,socket=3,pin1=32,pin2=33,pin3=2,pin3_on_expander=True,pin4=14,pin4_on_expander=True),
@@ -128,7 +128,7 @@ class BrainConfigs:
                 IigiirV01(robot_brain=robot_brain,socket=5,pin1=35,pin1_on_expander=True,pin2=18,pin2_on_expander=True,pin3=21,pin3_on_expander=True,pin4=19,pin4_on_expander=True),
                 BumperV02(robot_brain=robot_brain,socket=6,pin1=12,pin1_on_expander=True,pin2=25,pin2_on_expander=True,pin3=22,pin3_on_expander=True,pin4=23,pin4_on_expander=True)
             ]),
-            'rb33': TestBrain(robot_brain, [], [
+            'rb33': TestBrain(robot_brain, ['nand','orin','v05'], [
                 Rs485V05(robot_brain=robot_brain,socket=1,pin1=26,pin2=27,pin3=15,pin3_on_expander=True,pin4=13,pin4_on_expander=True),
                 OogiirV06(robot_brain=robot_brain,socket=2,pin1=5,pin2=4,pin3=36,pin4=13),
                 CanV05(robot_brain=robot_brain,socket=3,pin1=32,pin2=33,pin3=2,pin3_on_expander=True,pin4=14,pin4_on_expander=True),
@@ -136,12 +136,12 @@ class BrainConfigs:
                 BumperV02(robot_brain=robot_brain,socket=5,pin1=35,pin1_on_expander=True,pin2=18,pin2_on_expander=True,pin3=21,pin3_on_expander=True,pin4=19,pin4_on_expander=True),
                 IigiirV01(robot_brain=robot_brain,socket=6,pin1=22,pin1_on_expander=True,pin2=23,pin2_on_expander=True,pin3=25,pin3_on_expander=True,pin4=12,pin4_on_expander=True)
             ]),
-            'rb35': TestBrain(robot_brain, [], [
+            'rb35': TestBrain(robot_brain, ['nand','orin','v05'], [
                 CanV05(robot_brain=robot_brain,socket=1,pin1=26,pin1_on_expander=True,pin2=27,pin2_on_expander=True,pin3=15,pin3_on_expander=True,pin4=13,pin4_on_expander=True),
                 OogiirV07(robot_brain=robot_brain,socket=2,pin1=5,pin2=4,pin3=36,pin4=13),
                 CanV05(robot_brain=robot_brain,socket=3,pin1=32,pin2=33,pin3=2,pin3_on_expander=True,pin4=14,pin4_on_expander=True),
             ]),
-            'rb36': TestBrain(robot_brain, [], [
+            'rb36': TestBrain(robot_brain, ['nand','orin','v05'], [
                 Rs485V05(robot_brain=robot_brain,socket=1,pin1=26,pin2=27,pin3=15,pin3_on_expander=True,pin4=13,pin4_on_expander=True),
                 IigiirV02(robot_brain=robot_brain,socket=2,pin1=13,pin2=4,pin3=36,pin4=5),
                 CanV06(robot_brain=robot_brain,socket=3,pin1=32,pin2=33,pin3=2,pin3_on_expander=True,pin4=14,pin4_on_expander=True),
@@ -149,7 +149,7 @@ class BrainConfigs:
                 BumperV03(robot_brain=robot_brain,socket=5,pin1=35,pin1_on_expander=True,pin2=18,pin2_on_expander=True,pin3=21,pin3_on_expander=True,pin4=19,pin4_on_expander=True),
                 OogoorV01(robot_brain=robot_brain,socket=6,pin1=22,pin1_on_expander=True,pin2=23,pin2_on_expander=True,pin3=25,pin3_on_expander=True,pin4=12,pin4_on_expander=True)
             ]),
-            'rb37': TestBrain(robot_brain, [], [
+            'rb37': TestBrain(robot_brain, ['nand','orin','v05'], [
                 Rs485V05(robot_brain=robot_brain,socket=1,pin1=26,pin2=27,pin3=15,pin3_on_expander=True,pin4=13,pin4_on_expander=True),
                 OogiirV07(robot_brain=robot_brain,socket=2,pin1=5,pin2=4,pin3=36,pin4=13),
                 CanV06(robot_brain=robot_brain,socket=3,pin1=32,pin2=33,pin3=2,pin3_on_expander=True,pin4=14,pin4_on_expander=True),
@@ -157,9 +157,63 @@ class BrainConfigs:
                 BumperV03(robot_brain=robot_brain,socket=5,pin1=35,pin1_on_expander=True,pin2=18,pin2_on_expander=True,pin3=21,pin3_on_expander=True,pin4=19,pin4_on_expander=True),
                 OogiirV07(robot_brain=robot_brain,socket=6,pin1=12,pin1_on_expander=True,pin2=23,pin2_on_expander=True,pin3=25,pin3_on_expander=True,pin4=22,pin4_on_expander=True)
             ]),
-            'rb38': TestBrain(robot_brain, [], [
+            'rb38': TestBrain(robot_brain, ['nand','orin','v05'], [
                 Rs485V05(robot_brain=robot_brain,socket=1,pin1=26,pin2=27,pin3=15,pin3_on_expander=True,pin4=13,pin4_on_expander=True),
-            ])
+                BumperV03(robot_brain=robot_brain,socket=2,pin1=13,pin2=4,pin3=36,pin4=5),
+                CanV03(robot_brain=robot_brain,socket=3,pin1=32,pin2=33,pin3=2,pin3_on_expander=True,pin4=14,pin4_on_expander=True),
+                OogiirV07(robot_brain=robot_brain,socket=4,pin1=5,pin1_on_expander=True,pin2=4,pin2_on_expander=True,pin3=32,pin3_on_expander=True,pin4=33,pin4_on_expander=True),
+                IigiirV02(robot_brain=robot_brain,socket=5,pin1=35,pin1_on_expander=True,pin2=18,pin2_on_expander=True,pin3=21,pin3_on_expander=True,pin4=19,pin4_on_expander=True),
+                CanV06(robot_brain=robot_brain,socket=6,pin1=22,pin1_on_expander=True,pin2=23,pin2_on_expander=True,pin3=12,pin3_on_expander=True,pin4=25,pin4_on_expander=True)
+            ]),
+            'rb39': TestBrain(robot_brain, ['nand','orin','v05'], [
+                Rs485V05(robot_brain=robot_brain,socket=1,pin1=26,pin2=27,pin3=15,pin3_on_expander=True,pin4=13,pin4_on_expander=True),
+                OogiirV07(robot_brain=robot_brain,socket=2,pin1=5,pin2=4,pin3=36,pin4=13),
+                CanV06(robot_brain=robot_brain,socket=3,pin1=32,pin2=33,pin3=2,pin3_on_expander=True,pin4=14,pin4_on_expander=True),
+                OogiirV07(robot_brain=robot_brain,socket=4,pin1=5,pin1_on_expander=True,pin2=4,pin2_on_expander=True,pin3=32,pin3_on_expander=True,pin4=33,pin4_on_expander=True),
+                BumperV03(robot_brain=robot_brain,socket=5,pin1=35,pin1_on_expander=True,pin2=18,pin2_on_expander=True,pin3=21,pin3_on_expander=True,pin4=19,pin4_on_expander=True),
+                OogiirV07(robot_brain=robot_brain,socket=6,pin1=12,pin1_on_expander=True,pin2=23,pin2_on_expander=True,pin3=25,pin3_on_expander=True,pin4=22,pin4_on_expander=True)
+            ]),
+            'rb40': TestBrain(robot_brain, ['nand','orin','v05'], [
+                Rs485V05(robot_brain=robot_brain,socket=1,pin1=26,pin2=27,pin3=15,pin3_on_expander=True,pin4=13,pin4_on_expander=True),
+                OogiirV07(robot_brain=robot_brain,socket=2,pin1=5,pin2=4,pin3=36,pin4=13),
+                CanV06(robot_brain=robot_brain,socket=3,pin1=32,pin2=33,pin3=2,pin3_on_expander=True,pin4=14,pin4_on_expander=True),
+                OogiirV07(robot_brain=robot_brain,socket=4,pin1=5,pin1_on_expander=True,pin2=4,pin2_on_expander=True,pin3=32,pin3_on_expander=True,pin4=33,pin4_on_expander=True),
+                BumperV03(robot_brain=robot_brain,socket=5,pin1=35,pin1_on_expander=True,pin2=18,pin2_on_expander=True,pin3=21,pin3_on_expander=True,pin4=19,pin4_on_expander=True),
+                CanV06(robot_brain=robot_brain,socket=6,pin1=22,pin1_on_expander=True,pin2=23,pin2_on_expander=True,pin3=12,pin3_on_expander=True,pin4=25,pin4_on_expander=True)
+            ]),
+            'rb41': TestBrain(robot_brain, ['nand','orin','v05'], [
+               Rs485V05(robot_brain=robot_brain,socket=1,pin1=26,pin2=27,pin3=15,pin3_on_expander=True,pin4=13,pin4_on_expander=True),
+                OogiirV07(robot_brain=robot_brain,socket=2,pin1=5,pin2=4,pin3=36,pin4=13),
+                CanV06(robot_brain=robot_brain,socket=3,pin1=32,pin2=33,pin3=2,pin3_on_expander=True,pin4=14,pin4_on_expander=True),
+                OogiirV07(robot_brain=robot_brain,socket=4,pin1=5,pin1_on_expander=True,pin2=4,pin2_on_expander=True,pin3=32,pin3_on_expander=True,pin4=33,pin4_on_expander=True),
+                BumperV03(robot_brain=robot_brain,socket=5,pin1=35,pin1_on_expander=True,pin2=18,pin2_on_expander=True,pin3=21,pin3_on_expander=True,pin4=19,pin4_on_expander=True),
+                CanV06(robot_brain=robot_brain,socket=6,pin1=22,pin1_on_expander=True,pin2=23,pin2_on_expander=True,pin3=12,pin3_on_expander=True,pin4=25,pin4_on_expander=True)
+            ]),
+            'rb42': TestBrain(robot_brain, ['nand','orin','v05'], [   Rs485V05(robot_brain=robot_brain,socket=1,pin1=26,pin2=27,pin3=15,pin3_on_expander=True,pin4=13,pin4_on_expander=True),
+                OogiirV07(robot_brain=robot_brain,socket=2,pin1=5,pin2=4,pin3=36,pin4=13),
+                CanV06(robot_brain=robot_brain,socket=3,pin1=32,pin2=33,pin3=2,pin3_on_expander=True,pin4=14,pin4_on_expander=True),
+                OogiirV07(robot_brain=robot_brain,socket=4,pin1=5,pin1_on_expander=True,pin2=4,pin2_on_expander=True,pin3=32,pin3_on_expander=True,pin4=33,pin4_on_expander=True),
+                BumperV03(robot_brain=robot_brain,socket=5,pin1=35,pin1_on_expander=True,pin2=18,pin2_on_expander=True,pin3=21,pin3_on_expander=True,pin4=19,pin4_on_expander=True),
+                CanV06(robot_brain=robot_brain,socket=6,pin1=22,pin1_on_expander=True,pin2=23,pin2_on_expander=True,pin3=12,pin3_on_expander=True,pin4=25,pin4_on_expander=True)
+            ]),
+            'rb43': TestBrain(robot_brain, ['nand','orin','v05'], [
+                Rs485V05(robot_brain=robot_brain,socket=1,pin1=26,pin2=27,pin3=15,pin3_on_expander=True,pin4=13,pin4_on_expander=True),
+                OogiirV07(robot_brain=robot_brain,socket=2,pin1=5,pin2=4,pin3=36,pin4=13),
+                CanV06(robot_brain=robot_brain,socket=3,pin1=32,pin2=33,pin3=2,pin3_on_expander=True,pin4=14,pin4_on_expander=True),
+                IigiirV02(robot_brain=robot_brain,socket=5,pin1=35,pin1_on_expander=True,pin2=18,pin2_on_expander=True,pin3=21,pin3_on_expander=True,pin4=19,pin4_on_expander=True)
+            ]),
+            'rb44': TestBrain(robot_brain, ['nand','orin','v05'], [
+                Rs485V05(robot_brain=robot_brain,socket=1,pin1=26,pin2=27,pin3=15,pin3_on_expander=True,pin4=13,pin4_on_expander=True),
+                OogiirV07(robot_brain=robot_brain,socket=2,pin1=5,pin2=4,pin3=36,pin4=13),
+                CanV06(robot_brain=robot_brain,socket=3,pin1=32,pin2=33,pin3=2,pin3_on_expander=True,pin4=14,pin4_on_expander=True),
+                IigiirV02(robot_brain=robot_brain,socket=5,pin1=35,pin1_on_expander=True,pin2=18,pin2_on_expander=True,pin3=21,pin3_on_expander=True,pin4=19,pin4_on_expander=True)
+            ]),
+            'rb45': TestBrain(robot_brain, ['nand','orin','v05'], [
+                Rs485V05(robot_brain=robot_brain,socket=1,pin1=26,pin2=27,pin3=15,pin3_on_expander=True,pin4=13,pin4_on_expander=True),
+                OogiirV07(robot_brain=robot_brain,socket=2,pin1=5,pin2=4,pin3=36,pin4=13),
+                CanV06(robot_brain=robot_brain,socket=3,pin1=32,pin2=33,pin3=2,pin3_on_expander=True,pin4=14,pin4_on_expander=True),
+                IigiirV02(robot_brain=robot_brain,socket=5,pin1=35,pin1_on_expander=True,pin2=18,pin2_on_expander=True,pin3=21,pin3_on_expander=True,pin4=19,pin4_on_expander=True)
+            ]),
         }
 
     @property
