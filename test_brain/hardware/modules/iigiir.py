@@ -7,7 +7,7 @@ from rosys.helpers import remove_indentation
 from .module import Module
 
 
-class Oiio(Module):
+class Iigiir(Module):
     def __init__(self, *,
                  robot_brain: rosys.hardware.RobotBrain,
                  socket: int,
@@ -23,25 +23,26 @@ class Oiio(Module):
                          pin4=pin4, pin4_on_expander=pin4_on_expander)
         self.in_1_status = False
         self.in_2_status = False
-        self.out_1_value = False
-        self.out_2_value = False
-        self.log = logging.getLogger('test_brain.oiio')
+        self.in_3_status = False
+        self.in_4_status = False
+        self.log = logging.getLogger('test_brain.iigiir')
         self.lizard_code = remove_indentation(f'''
-        s{self.socket}_in_1 = {"p0." if self.pin2_on_expander else ""}Input({self.pin2})
-        s{self.socket}_in_2 = {"p0." if self.pin3_on_expander else ""}Input({self.pin3})
-        s{self.socket}_out_1 = {"p0." if self.pin1_on_expander else ""}Output({self.pin1})
-        s{self.socket}_out_2 = {"p0." if self.pin4_on_expander else ""}Output({self.pin4})
+        s{self.socket}_in_1 = {"p0." if self.pin1_on_expander else ""}Input({self.pin1})
+        s{self.socket}_in_2 = {"p0." if self.pin2_on_expander else ""}Input({self.pin2})
+        s{self.socket}_in_3 = {"p0." if self.pin3_on_expander else ""}Input({self.pin3})
+        s{self.socket}_in_4 = {"p0." if self.pin4_on_expander else ""}Input({self.pin4})
         ''')
-        self.core_message_fields = [f's{self.socket}_in_1.level', f's{self.socket}_in_2.level']
+        self.core_message_fields = [
+            f's{self.socket}_in_1.level',
+            f's{self.socket}_in_2.level',
+            f's{self.socket}_in_3.level',
+            f's{self.socket}_in_4.level']
 
-    def create_ui(self):
+    def developer_ui(self):
         with ui.card():
-            ui.markdown(f'**Socket {self.socket}: oiio**')
+            ui.markdown(f'**Socket {self.socket}: iigiir**')
             with ui.row():
                 with ui.column():
-                    with ui.row():
-                        ui.label('out_1')
-                        ui.switch(value=False, on_change=self.send_out_1).bind_value(self, 'out_1_value')
                     with ui.row():
                         ui.label('in_1 pin')
                         ui.icon('highlight_off').classes('text-red').bind_visibility_from(self,
@@ -54,17 +55,29 @@ class Oiio(Module):
                                                                                           'in_2_status', backward=lambda x: not x)
                         ui.icon('check_circle_outline').classes(
                             'text-green').bind_visibility_from(self, 'in_2_status')
+
                     with ui.row():
-                        ui.label('out_2')
-                        ui.switch(value=False, on_change=self.send_out_2).bind_value(self, 'out_2_value')
+                        ui.label('in_3 pin')
+                        ui.icon('highlight_off').classes('text-red').bind_visibility_from(self,
+                                                                                          'in_3_status', backward=lambda x: not x)
+                        ui.icon('check_circle_outline').classes(
+                            'text-green').bind_visibility_from(self, 'in_3_status')
+
+                    with ui.row():
+                        ui.label('in_4 pin')
+                        ui.icon('highlight_off').classes('text-red').bind_visibility_from(self,
+                                                                                          'in_4_status', backward=lambda x: not x)
+                        ui.icon('check_circle_outline').classes(
+                            'text-green').bind_visibility_from(self, 'in_4_status')
 
     def handle_core_output(self, words: list[str]):
         self.in_1_status = int(words.pop(0)) == 1
         self.in_2_status = int(words.pop(0)) == 1
+        self.in_3_status = int(words.pop(0)) == 1
+        self.in_4_status = int(words.pop(0)) == 1
 
+class IigiirV01(Iigiir):
+    ...
 
-    async def send_out_1(self):
-        await self.send_out(1, self.out_1_value)
-
-    async def send_out_2(self):
-        await self.send_out(2, self.out_2_value)
+class IigiirV02(Iigiir):
+    ...

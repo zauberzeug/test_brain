@@ -39,7 +39,7 @@ class Bumper(Module):
             f's{self.socket}_in_3.level',
             f's{self.socket}_in_4.level']
 
-    def create_ui(self):
+    def developer_ui(self):
         with ui.card():
             ui.markdown(f'**Socket {self.socket}: Bumper**')
             with ui.column():

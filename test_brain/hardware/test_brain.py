@@ -1,20 +1,21 @@
 import logging
 
 import rosys
-import rosys.hardware
+from nicegui import ui
 from rosys.helpers import remove_indentation
 
-from modules import Can, Module, Rs485
+from .modules import Can, Module, Rs485
 
 
 class TestBrain:
     def __init__(self, robot_brain: rosys.hardware.RobotBrain, flash_params: list[str], modules: list[Module]) -> None:
+        self.log = logging.getLogger('test_brain.testbrain_hardware')
         self.robot_brain = robot_brain
         self.flash_params = flash_params
         self.modules = modules
-        print(f'TestBrain initialized with {len(modules)} modules')  # Debug-Ausgabe
+        self.log.debug('TestBrain initialized with %d modules', len(modules))
         for module in modules:
-            print(f'  Module: {type(module).__name__}')  # Debug-Ausgabe für jedes Modul
+            self.log.debug('  Module: %s', type(module).__name__)
 
         self.lizard_code = self.generate_lizard_code()
         self.robot_brain.lizard_code = self.lizard_code
@@ -26,9 +27,6 @@ class TestBrain:
         self.sockets_set: bool = False
         self.rdyp_status: bool = False
         self.vdp_status: bool = False
-
-        self.log = logging.getLogger('test_brain.testbrain_hardware')
-
         rosys.on_repeat(self.update, 0.01)
 
 
@@ -45,6 +43,7 @@ class TestBrain:
             bluetooth = Bluetooth("Test Brain")
             serial = Serial(26, 27, 115200, 1)
             p0 = Expander(serial, 25, 14)
+            # TODO: use IMU
             #imu = Imu()
             ''')
         for module in self.modules:
@@ -84,7 +83,7 @@ class TestBrain:
     async def update(self) -> None:
         if not self.active:
             return
-        for time, line in await self.robot_brain.read_lines():  # noqa: B007
+        for _, line in await self.robot_brain.read_lines():
             words = line.split()
 
             if line.startswith('core'):
@@ -109,3 +108,12 @@ class TestBrain:
                     if isinstance(module, Rs485):
                         await module.read_rs485(line)
                         return
+
+    def developer_ui(self) -> None:
+        with ui.column().classes('w-full'):
+            with ui.row().classes('items-stretch justify-start').style('gap: 1rem; flex-wrap: wrap'):
+                if not self.modules:
+                    self.log.warning('No modules configured for this brain')
+                    return
+                for module in self.modules:
+                    module.developer_ui()

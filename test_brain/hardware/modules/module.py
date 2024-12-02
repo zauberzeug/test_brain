@@ -4,12 +4,13 @@ import rosys
 
 
 class Module(rosys.hardware.Module, abc.ABC):
-    def __init__(self,*, robot_brain: rosys.hardware.RobotBrain,
+    def __init__(self, *, robot_brain: rosys.hardware.RobotBrain,
                  pin1: int, pin1_on_expander: bool = False,
                  pin2: int, pin2_on_expander: bool = False,
                  pin3: int, pin3_on_expander: bool = False,
                  pin4: int, pin4_on_expander: bool = False,
                  socket:int) -> None:
+        super().__init__()
         self.robot_brain = robot_brain
         self.pin1 = pin1
         self.pin1_on_expander = pin1_on_expander
@@ -23,7 +24,7 @@ class Module(rosys.hardware.Module, abc.ABC):
         self.lizard_code = ''
         self.core_message_fields: list[str] = []
 
-    def create_ui(self):
+    def developer_ui(self):
         pass
 
     def handle_core_output(self,words:list[str]):
@@ -41,12 +42,12 @@ class Module(rosys.hardware.Module, abc.ABC):
 
 
 class EmptyModule(Module):
-    def __init__(self,*, robot_brain: rosys.hardware.RobotBrain,
-                 pin1: int=0, pin1_on_expander: bool=False,
-                 pin2: int=0, pin2_on_expander: bool=False,
-                 pin3: int=0, pin3_on_expander: bool=False,
-                 pin4: int=0, pin4_on_expander: bool=False,
-                 socket:int) -> None:
+    def __init__(self, *, robot_brain: rosys.hardware.RobotBrain,
+                 pin1: int = 0, pin1_on_expander: bool = False,
+                 pin2: int = 0, pin2_on_expander: bool = False,
+                 pin3: int = 0, pin3_on_expander: bool = False,
+                 pin4: int = 0, pin4_on_expander: bool = False,
+                 socket: int = 0) -> None:
         super().__init__(robot_brain=robot_brain,
                          pin1=pin1, pin1_on_expander=pin1_on_expander,
                          pin2=pin2, pin2_on_expander=pin2_on_expander,

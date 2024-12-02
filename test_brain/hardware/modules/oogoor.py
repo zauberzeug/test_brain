@@ -33,7 +33,7 @@ class Oogoor(Module):
         s{self.socket}_out_4 = {"p0." if self.pin4_on_expander else ""}Output({self.pin4})
         ''')
 
-    def create_ui(self):
+    def developer_ui(self):
         with ui.card():
             ui.markdown(f'**Socket {self.socket}: oogoor**')
             with ui.row():
