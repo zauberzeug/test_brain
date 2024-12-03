@@ -13,12 +13,9 @@ class System:
         super().__init__()
         self.log = logging.getLogger('test_brain.system')
         rosys.hardware.SerialCommunication.search_paths.insert(0, '/dev/ttyTHS0')
-        self.is_real = rosys.hardware.SerialCommunication.is_possible()
         self.communication = rosys.hardware.SerialCommunication()
         self.robot_brain = rosys.hardware.RobotBrain(self.communication)
         self.test_brain: TestBrain = BrainConfigs(self.robot_brain).get_brain(brain_id)
-        self.test_brain.active = True
-        self.test_brain.update_lizard()
 
     def developer_ui(self) -> None:
         with ui.header().props('elevated').classes('q-pa-xs q-pt-sm', remove='q-pa-md items-start gap-4'):

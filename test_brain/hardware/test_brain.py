@@ -20,7 +20,6 @@ class TestBrain:
         self.lizard_code = self.generate_lizard_code()
         self.robot_brain.lizard_code = self.lizard_code
         self.robot_brain.lizard_firmware.flash_params = self.flash_params
-        self.active = False
         self.heap = 0.0
         self.rdyp = True
         self.en3 = True
@@ -28,12 +27,6 @@ class TestBrain:
         self.rdyp_status: bool = False
         self.vdp_status: bool = False
         rosys.on_repeat(self.update, 0.01)
-
-
-    def update_lizard(self) -> None:
-        self.lizard_code = self.generate_lizard_code()
-        self.robot_brain.lizard_code = self.lizard_code
-        self.robot_brain.lizard_firmware.flash_params = self.flash_params
 
     def generate_lizard_code(self) -> str:
         output_fields = ['core.millis','core.heap', 'rdyp_status.level', 'vdp_status.level']
@@ -81,8 +74,7 @@ class TestBrain:
 
 
     async def update(self) -> None:
-        if not self.active:
-            return
+
         for _, line in await self.robot_brain.read_lines():
             words = line.split()
 
