@@ -1,3 +1,5 @@
+from dataclasses import dataclass
+
 from .modules import (
     BumperV02,
     BumperV03,
@@ -21,10 +23,51 @@ from .modules import (
 from .test_brain import TestBrain
 
 
+@dataclass
+class ModuleConfig:
+    module_type: str
+    socket: int
+    pin1: int
+    pin2: int
+    pin3: int
+    pin4: int
+    pin1_on_expander: bool = False
+    pin2_on_expander: bool = False
+    pin3_on_expander: bool = False
+    pin4_on_expander: bool = False
+
+@dataclass
+class BrainConfig:
+    flags: list[str]
+    modules: list[ModuleConfig]
+
+
 class BrainConfigs:
     def __init__(self, robot_brain):
-        # TODO: do not initialize all brains here
-        self.brain_configs = {
+        self._robot_brain = robot_brain
+        self._brain_configs = {
+            'rb11': BrainConfig(
+                flags=[],
+                modules=[
+                    ModuleConfig('Rs485V03', socket=1, pin1=26, pin1_on_expander=False, pin2=27, pin2_on_expander=False, pin3=13, pin3_on_expander=True, pin4=15, pin4_on_expander=True),
+                    ModuleConfig('OogiirV05', socket=2, pin1=4, pin1_on_expander=False, pin2=13, pin2_on_expander=False, pin3=36, pin3_on_expander=False, pin4=5, pin4_on_expander=False),
+                    ModuleConfig('CanV03', socket=3, pin1=32, pin1_on_expander=False, pin2=33, pin2_on_expander=False, pin3=14, pin3_on_expander=True, pin4=2, pin4_on_expander=True),
+                    ModuleConfig('Oiio', socket=6, pin1=12, pin1_on_expander=True, pin2=23, pin2_on_expander=True, pin3=36, pin3_on_expander=True, pin4=39, pin4_on_expander=True),
+                ]
+            ),
+            'rb19': BrainConfig(
+                flags=['nand'],
+                modules=[
+                    ModuleConfig('Rs485V05', socket=1, pin1=26, pin1_on_expander=False, pin2=27, pin2_on_expander=False, pin3=15, pin3_on_expander=True, pin4=13, pin4_on_expander=True),
+                    ModuleConfig('OogiirV07', socket=2, pin1=5, pin1_on_expander=False, pin2=4, pin2_on_expander=False, pin3=36, pin3_on_expander=False, pin4=13, pin4_on_expander=False),
+                    ModuleConfig('CanV06', socket=3, pin1=32, pin1_on_expander=False, pin2=33, pin2_on_expander=False, pin3=2, pin3_on_expander=True, pin4=14, pin4_on_expander=True),
+                    ModuleConfig('OogoorV01', socket=4, pin1=33, pin1_on_expander=True, pin2=4, pin2_on_expander=True, pin3=32, pin3_on_expander=True, pin4=5, pin4_on_expander=True),
+                    ModuleConfig('IigiirV02', socket=5, pin1=35, pin1_on_expander=True, pin2=18, pin2_on_expander=True, pin3=21, pin3_on_expander=True, pin4=19, pin4_on_expander=True),
+                    ModuleConfig('CanV04', socket=6, pin1=22, pin1_on_expander=True, pin2=23, pin2_on_expander=True, pin3=12, pin3_on_expander=True, pin4=25, pin4_on_expander=True)
+                ]
+            ),
+        }
+        self.old_brain_configs = {
             'rb11': TestBrain(robot_brain, [], [
                 Rs485V03(robot_brain=robot_brain, socket=1, pin1=26, pin2=27, pin3=13, pin3_on_expander=True, pin4=15, pin4_on_expander=True),
                 OogiirV05(robot_brain=robot_brain, socket=2, pin1=4, pin2=13, pin3=36, pin4=5),
@@ -219,7 +262,26 @@ class BrainConfigs:
 
     @property
     def brain_names(self):
-        return list(self.brain_configs.keys())
+        return list(self._brain_configs.keys())
 
     def get_brain(self, robot_brain_name: str) -> TestBrain:
-        return self.brain_configs[robot_brain_name]
+        assert robot_brain_name in self._brain_configs
+        config = self._brain_configs[robot_brain_name]
+        brain_modules = []
+        for module_config in config.modules:
+            ModuleClass = globals()[module_config.module_type]
+            module = ModuleClass(
+                robot_brain=self._robot_brain,
+                socket=module_config.socket,
+                pin1=module_config.pin1,
+                pin2=module_config.pin2,
+                pin3=module_config.pin3,
+                pin4=module_config.pin4,
+                pin1_on_expander=module_config.pin1_on_expander,
+                pin2_on_expander=module_config.pin2_on_expander,
+                pin3_on_expander=module_config.pin3_on_expander,
+                pin4_on_expander=module_config.pin4_on_expander,
+            )
+            brain_modules.append(module)
+        brain = TestBrain(self._robot_brain, config.flags, brain_modules)
+        return brain
