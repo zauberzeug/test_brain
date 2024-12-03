@@ -65,16 +65,16 @@ class Rs485V03(Rs485):
                         self.ui_log = ui.log(max_lines=10).classes('w-full h-20')
                     with ui.row():
                         ui.label('in_1 pin')
-                        ui.icon('highlight_off').classes('text-red').bind_visibility_from(self,
-                                                                                          'in_1_status', backward=lambda x: not x)
-                        ui.icon('check_circle_outline').classes(
-                            'text-green').bind_visibility_from(self, 'in_1_status')
+                        ui.icon('highlight_off').classes('text-red') \
+                            .bind_visibility_from(self, 'in_1_status', backward=lambda x: not x)
+                        ui.icon('check_circle_outline').classes('text-green') \
+                            .bind_visibility_from(self, 'in_1_status')
                     with ui.row():
                         ui.label('in_2 pin')
-                        ui.icon('highlight_off').classes('text-red').bind_visibility_from(self,
-                                                                                          'in_2_status', backward=lambda x: not x)
-                        ui.icon('check_circle_outline').classes(
-                            'text-green').bind_visibility_from(self, 'in_2_status')
+                        ui.icon('highlight_off').classes('text-red') \
+                            .bind_visibility_from(self, 'in_2_status', backward=lambda x: not x)
+                        ui.icon('check_circle_outline').classes('text-green') \
+                            .bind_visibility_from(self, 'in_2_status')
 
     def handle_core_output(self,words:list[str]):
         self.in_1_status = int(words.pop(0)) == 1
