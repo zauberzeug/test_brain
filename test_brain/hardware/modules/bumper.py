@@ -45,26 +45,26 @@ class Bumper(Module):
             with ui.column():
                 with ui.row():
                     ui.label('in_1 pin')
-                    ui.icon('highlight_off').classes('text-red').bind_visibility_from(self,
-                                                                                            'in_1_status', backward=lambda x: not x)
+                    ui.icon('highlight_off').classes('text-red') \
+                        .bind_visibility_from(self, 'in_1_status', backward=lambda x: not x)
                     ui.icon('check_circle_outline').classes(
                             'text-green').bind_visibility_from(self, 'in_1_status')
                 with ui.row():
                     ui.label('in_2 pin')
-                    ui.icon('highlight_off').classes('text-red').bind_visibility_from(self,
-                                                                                        'in_2_status', backward=lambda x: not x)
+                    ui.icon('highlight_off').classes('text-red') \
+                        .bind_visibility_from(self, 'in_2_status', backward=lambda x: not x)
                     ui.icon('check_circle_outline').classes(
                         'text-green').bind_visibility_from(self, 'in_2_status')
                 with ui.row():
                     ui.label('in_3 pin')
-                    ui.icon('highlight_off').classes('text-red').bind_visibility_from(self,
-                                                                                        'in_3_status', backward=lambda x: not x)
+                    ui.icon('highlight_off').classes('text-red') \
+                        .bind_visibility_from(self, 'in_3_status', backward=lambda x: not x)
                     ui.icon('check_circle_outline').classes(
                         'text-green').bind_visibility_from(self, 'in_3_status')
                 with ui.row():
                     ui.label('in_4 pin')
-                    ui.icon('highlight_off').classes('text-red').bind_visibility_from(self,
-                                                                                        'in_4_status', backward=lambda x: not x)
+                    ui.icon('highlight_off').classes('text-red') \
+                        .bind_visibility_from(self, 'in_4_status', backward=lambda x: not x)
                     ui.icon('check_circle_outline').classes(
                         'text-green').bind_visibility_from(self, 'in_4_status')
 

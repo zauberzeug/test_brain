@@ -36,7 +36,7 @@ class Oogiir(Module):
 
     def developer_ui(self):
         with ui.card():
-            ui.markdown(f'**Socket {self.socket}: oogiir**')
+            ui.label(f'Socket {self.socket}: oogiir').classes('text-bold')
             with ui.row():
                 with ui.column():
                     with ui.row():
@@ -47,14 +47,14 @@ class Oogiir(Module):
                         ui.switch(value=False, on_change=self.send_out_2).bind_value(self, 'out_2_value')
                     with ui.row():
                         ui.label('in_1 pin')
-                        ui.icon('highlight_off').classes('text-red').bind_visibility_from(self,
-                                                                                          'in_1_status', backward=lambda x: not x)
+                        ui.icon('highlight_off').classes('text-red') \
+                            .bind_visibility_from(self, 'in_1_status', backward=lambda x: not x)
                         ui.icon('check_circle_outline').classes(
                             'text-green').bind_visibility_from(self, 'in_1_status')
                     with ui.row():
                         ui.label('in_2 pin')
-                        ui.icon('highlight_off').classes('text-red').bind_visibility_from(self,
-                                                                                          'in_2_status', backward=lambda x: not x)
+                        ui.icon('highlight_off').classes('text-red') \
+                            .bind_visibility_from(self, 'in_2_status', backward=lambda x: not x)
                         ui.icon('check_circle_outline').classes(
                             'text-green').bind_visibility_from(self, 'in_2_status')
 
