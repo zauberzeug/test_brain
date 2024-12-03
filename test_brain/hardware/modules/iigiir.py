@@ -40,7 +40,7 @@ class Iigiir(Module):
 
     def developer_ui(self):
         with ui.card():
-            ui.markdown(f'**Socket {self.socket}: iigiir**')
+            ui.label(f'Socket {self.socket}: iigiir').classes('text-bold')
             with ui.row():
                 with ui.column():
                     with ui.row():

@@ -41,7 +41,7 @@ class Bumper(Module):
 
     def developer_ui(self):
         with ui.card():
-            ui.markdown(f'**Socket {self.socket}: Bumper**')
+            ui.label(f'Socket {self.socket}: Bumper').classes('text-bold')
             with ui.column():
                 with ui.row():
                     ui.label('in_1 pin')

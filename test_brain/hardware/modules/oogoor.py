@@ -35,7 +35,7 @@ class Oogoor(Module):
 
     def developer_ui(self):
         with ui.card():
-            ui.markdown(f'**Socket {self.socket}: oogoor**')
+            ui.label(f'Socket {self.socket}: oogoor').classes('text-bold')
             with ui.row():
                 with ui.column():
                     with ui.row():

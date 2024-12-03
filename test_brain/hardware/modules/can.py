@@ -60,7 +60,7 @@ class CanV03(Can):
 
     def developer_ui(self):
         with ui.card():
-            ui.markdown(f'**Socket {self.socket}: can_v03**')
+            ui.label(f'Socket {self.socket}: can_v03').classes('text-bold')
             with ui.row():
                 with ui.column():
                     with ui.row():

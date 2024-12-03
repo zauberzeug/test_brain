@@ -36,7 +36,7 @@ class Oiio(Module):
 
     def developer_ui(self):
         with ui.card():
-            ui.markdown(f'**Socket {self.socket}: oiio**')
+            ui.label(f'Socket {self.socket}: oiio').classes('text-bold')
             with ui.row():
                 with ui.column():
                     with ui.row():
