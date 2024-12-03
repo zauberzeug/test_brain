@@ -18,16 +18,10 @@ services:
 
     hostname: docker
     cap_add:
-      - SYS_NICE # allow container to set process priorities
-      - NET_BIND_SERVICE # allow container to bind to privileged ports
+      - SYS_NICE
+      - NET_BIND_SERVICE
     logging:
       driver: "json-file"
       options:
         max-size: "200m"
         max-file: "100"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 40s
