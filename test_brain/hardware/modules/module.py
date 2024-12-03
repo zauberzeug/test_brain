@@ -39,18 +39,3 @@ class Module(rosys.hardware.Module, abc.ABC):
 
     async def send_rs485(self):
         await self.robot_brain.send(f's{self.socket}_rs485.send(0xdd, 0xa5, 0x03, 0x00, 0xff, 0xfd, 0x77)')
-
-
-class EmptyModule(Module):
-    def __init__(self, *, robot_brain: rosys.hardware.RobotBrain,
-                 pin1: int = 0, pin1_on_expander: bool = False,
-                 pin2: int = 0, pin2_on_expander: bool = False,
-                 pin3: int = 0, pin3_on_expander: bool = False,
-                 pin4: int = 0, pin4_on_expander: bool = False,
-                 socket: int = 0) -> None:
-        super().__init__(robot_brain=robot_brain,
-                         pin1=pin1, pin1_on_expander=pin1_on_expander,
-                         pin2=pin2, pin2_on_expander=pin2_on_expander,
-                         pin3=pin3, pin3_on_expander=pin3_on_expander,
-                         pin4=pin4, pin4_on_expander=pin4_on_expander,
-                         socket=socket)
