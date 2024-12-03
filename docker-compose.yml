@@ -1,11 +1,11 @@
 version: "3.9"
 services:
   rosys:
-    image: "zauberzeug/rosys:0.11.0"
+    build: .
     volumes:
       - ./:/app
-      - ~/.rosys:/root/.rosys
-      - ./../lizard:/root/.lizard
+      - ~/.rosys:/home/zauberzeug/.rosys
+      - ./../lizard:/home/zauberzeug/.lizard
       # - ./../rosys:/rosys
       # - ./../nicegui/nicegui:/usr/local/lib/python3.11/site-packages/nicegui
     devices:
@@ -14,23 +14,14 @@ services:
     restart: always
     privileged: true
     environment:
-      - ROBOT_ID=Test Brain
       - TZ=Europe/Amsterdam
 
     hostname: docker
-    build:
-      context: ./
     cap_add:
-      - SYS_NICE # allow container to set process priorities
+      - SYS_NICE
+      - NET_BIND_SERVICE
     logging:
       driver: "json-file"
       options:
         max-size: "200m"
         max-file: "100"
-    command: /start.sh
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 40s
