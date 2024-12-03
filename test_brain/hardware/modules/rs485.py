@@ -55,7 +55,7 @@ class Rs485V03(Rs485):
 
     def developer_ui(self):
         with ui.card():
-            ui.markdown(f'**Socket {self.socket}: rs485_v03**')
+            ui.label(f'Socket {self.socket}: rs485_v03').classes('text-bold')
             with ui.row():
                 with ui.column():
                     with ui.row():
