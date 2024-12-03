@@ -11,7 +11,8 @@ load_dotenv('.env')
 brain_id = os.getenv('BRAIN_ID')
 assert brain_id is not None, 'BRAIN_ID is not set'
 
-async def startup() -> None:
+def startup() -> None:
+    assert brain_id is not None
     system = System(brain_id)
     ui.colors(primary='#6E93D6', secondary='#53B689', accent='#111B1E', positive='#53B689')
     @ui.page('/')
