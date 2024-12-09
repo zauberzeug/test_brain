@@ -1,3 +1,4 @@
+# pylint: disable=W0611
 from dataclasses import dataclass
 
 from .modules import (  # noqa: F401  needs to be imported for get_brains to work
