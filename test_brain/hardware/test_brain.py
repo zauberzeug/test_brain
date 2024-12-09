@@ -8,7 +8,8 @@ from .modules import Can, Module, Rs485
 
 
 class TestBrain:
-    def __init__(self, robot_brain: rosys.hardware.RobotBrain, flash_params: list[str], modules: list[Module]) -> None:
+    def __init__(self, name: str, robot_brain: rosys.hardware.RobotBrain, flash_params: list[str], modules: list[Module]) -> None:
+        self.name = name
         self.log = logging.getLogger('test_brain.testbrain_hardware')
         self.robot_brain = robot_brain
         self.flash_params = flash_params
@@ -30,10 +31,10 @@ class TestBrain:
 
     def generate_lizard_code(self) -> str:
         output_fields = ['core.millis','core.heap', 'rdyp_status.level', 'vdp_status.level']
-        code = remove_indentation('''
+        code = remove_indentation(f'''
             rdyp = Output(15)
             en3 = Output(12)
-            bluetooth = Bluetooth("Test Brain")
+            bluetooth = Bluetooth("Test Brain: {self.name}")
             serial = Serial(26, 27, 115200, 1)
             p0 = Expander(serial, 25, 14)
             # TODO: use IMU
