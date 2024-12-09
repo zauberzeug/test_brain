@@ -1,25 +1,5 @@
 from dataclasses import dataclass
 
-from .modules import (  # noqa: F401  needs to be imported for get_brains to work
-    BumperV02,
-    BumperV03,
-    CanV03,
-    CanV04,
-    CanV05,
-    CanV06,
-    IigiirV01,
-    IigiirV02,
-    Oiio,
-    OogiirV02mod,
-    OogiirV05,
-    OogiirV06,
-    OogiirV07,
-    OogoorV01,
-    Rs485V03,
-    Rs485V04,
-    Rs485V05,
-    Rs485V051,
-)
 from .test_brain import TestBrain
 
 
