@@ -314,6 +314,72 @@ class BrainConfigs:
                     ModuleConfig('IigiirV02', socket=5, pin1=35, pin1_on_expander=True, pin2=18, pin2_on_expander=True, pin3=21, pin3_on_expander=True, pin4=19, pin4_on_expander=True)
                 ]
             ),
+            'rb46': BrainConfig(
+                flags=['nand', 'orin', 'v05'],
+                modules=[
+                    ModuleConfig('Rs485V05', socket=1, pin1=26, pin1_on_expander=True, pin2=27, pin2_on_expander=True, pin3=15, pin3_on_expander=True, pin4=13, pin4_on_expander=True),
+                    ModuleConfig('OogiirV07', socket=2, pin1=5, pin1_on_expander=False, pin2=4, pin2_on_expander=False, pin3=36, pin3_on_expander=False, pin4=13, pin4_on_expander=False),
+                    ModuleConfig('CanV06', socket=3, pin1=32, pin1_on_expander=False, pin2=33, pin2_on_expander=False, pin3=2, pin3_on_expander=True, pin4=14, pin4_on_expander=True),
+                    ModuleConfig('OogiirV07', socket=4, pin1=5, pin1_on_expander=True, pin2=4, pin2_on_expander=True, pin3=32, pin3_on_expander=True, pin4=33, pin4_on_expander=True),
+                    ModuleConfig('BumperV03', socket=5, pin1=35, pin1_on_expander=True, pin2=18, pin2_on_expander=True, pin3=21, pin3_on_expander=True, pin4=19, pin4_on_expander=True),
+                    ModuleConfig('OogiirV07', socket=6, pin1=12, pin1_on_expander=True, pin2=23, pin2_on_expander=True, pin3=25, pin3_on_expander=True, pin4=22, pin4_on_expander=True)
+                ]
+            ),
+            'rb47': BrainConfig(
+                flags=['nand', 'orin', 'v05'],
+                modules=[
+                    ModuleConfig('Rs485V05', socket=1, pin1=26, pin1_on_expander=True, pin2=27, pin2_on_expander=True, pin3=15, pin3_on_expander=True, pin4=13, pin4_on_expander=True),
+                    ModuleConfig('OogiirV07', socket=2, pin1=5, pin1_on_expander=False, pin2=4, pin2_on_expander=False, pin3=36, pin3_on_expander=False, pin4=13, pin4_on_expander=False),
+                    ModuleConfig('CanV06', socket=3, pin1=32, pin1_on_expander=False, pin2=33, pin2_on_expander=False, pin3=2, pin3_on_expander=True, pin4=14, pin4_on_expander=True),
+                    ModuleConfig('OogiirV07', socket=4, pin1=5, pin1_on_expander=True, pin2=4, pin2_on_expander=True, pin3=32, pin3_on_expander=True, pin4=33, pin4_on_expander=True),
+                    ModuleConfig('BumperV03', socket=5, pin1=35, pin1_on_expander=True, pin2=18, pin2_on_expander=True, pin3=21, pin3_on_expander=True, pin4=19, pin4_on_expander=True),
+                    ModuleConfig('OogiirV07', socket=6, pin1=12, pin1_on_expander=True, pin2=23, pin2_on_expander=True, pin3=25, pin3_on_expander=True, pin4=22, pin4_on_expander=True)
+                ]
+            ),
+            'rb48': BrainConfig(
+                flags=['nand', 'orin', 'v05'],
+                modules=[
+                    ModuleConfig('Rs485V05', socket=1, pin1=26, pin1_on_expander=True, pin2=27, pin2_on_expander=True, pin3=15, pin3_on_expander=True, pin4=13, pin4_on_expander=True),
+                    ModuleConfig('OogiirV07', socket=2, pin1=5, pin1_on_expander=False, pin2=4, pin2_on_expander=False, pin3=36, pin3_on_expander=False, pin4=13, pin4_on_expander=False),
+                    ModuleConfig('CanV06', socket=3, pin1=32, pin1_on_expander=False, pin2=33, pin2_on_expander=False, pin3=2, pin3_on_expander=True, pin4=14, pin4_on_expander=True),
+                    ModuleConfig('OogiirV07', socket=4, pin1=5, pin1_on_expander=True, pin2=4, pin2_on_expander=True, pin3=32, pin3_on_expander=True, pin4=33, pin4_on_expander=True),
+                    ModuleConfig('BumperV03', socket=5, pin1=35, pin1_on_expander=True, pin2=18, pin2_on_expander=True, pin3=21, pin3_on_expander=True, pin4=19, pin4_on_expander=True),
+                    ModuleConfig('OogiirV07', socket=6, pin1=12, pin1_on_expander=True, pin2=23, pin2_on_expander=True, pin3=25, pin3_on_expander=True, pin4=22, pin4_on_expander=True)
+                ]
+            ),
+            'rb49': BrainConfig(
+                flags=['nand', 'orin', 'v05'],
+                modules=[
+                    ModuleConfig('Rs485V05', socket=1, pin1=26, pin1_on_expander=True, pin2=27, pin2_on_expander=True, pin3=15, pin3_on_expander=True, pin4=13, pin4_on_expander=True),
+                    ModuleConfig('OogiirV07', socket=2, pin1=5, pin1_on_expander=False, pin2=4, pin2_on_expander=False, pin3=36, pin3_on_expander=False, pin4=13, pin4_on_expander=False),
+                    ModuleConfig('CanV06', socket=3, pin1=32, pin1_on_expander=False, pin2=33, pin2_on_expander=False, pin3=2, pin3_on_expander=True, pin4=14, pin4_on_expander=True),
+                    ModuleConfig('OogiirV07', socket=4, pin1=5, pin1_on_expander=True, pin2=4, pin2_on_expander=True, pin3=32, pin3_on_expander=True, pin4=33, pin4_on_expander=True),
+                    ModuleConfig('BumperV03', socket=5, pin1=35, pin1_on_expander=True, pin2=18, pin2_on_expander=True, pin3=21, pin3_on_expander=True, pin4=19, pin4_on_expander=True),
+                    ModuleConfig('CanV06', socket=6, pin1=22, pin1_on_expander=True, pin2=23, pin2_on_expander=True, pin3=12, pin3_on_expander=True, pin4=25, pin4_on_expander=True)
+                ]
+            ),
+            'rb50': BrainConfig(
+                flags=['nand', 'orin', 'v05'],
+                modules=[
+                    ModuleConfig('Rs485V05', socket=1, pin1=26, pin1_on_expander=True, pin2=27, pin2_on_expander=True, pin3=15, pin3_on_expander=True, pin4=13, pin4_on_expander=True),
+                    ModuleConfig('OogiirV07', socket=2, pin1=5, pin1_on_expander=False, pin2=4, pin2_on_expander=False, pin3=36, pin3_on_expander=False, pin4=13, pin4_on_expander=False),
+                    ModuleConfig('CanV06', socket=3, pin1=32, pin1_on_expander=False, pin2=33, pin2_on_expander=False, pin3=2, pin3_on_expander=True, pin4=14, pin4_on_expander=True),
+                    ModuleConfig('OogiirV07', socket=4, pin1=5, pin1_on_expander=True, pin2=4, pin2_on_expander=True, pin3=32, pin3_on_expander=True, pin4=33, pin4_on_expander=True),
+                    ModuleConfig('BumperV03', socket=5, pin1=35, pin1_on_expander=True, pin2=18, pin2_on_expander=True, pin3=21, pin3_on_expander=True, pin4=19, pin4_on_expander=True),
+                    ModuleConfig('CanV06', socket=6, pin1=22, pin1_on_expander=True, pin2=23, pin2_on_expander=True, pin3=12, pin3_on_expander=True, pin4=25, pin4_on_expander=True)
+                ]
+            ),
+            'rb51': BrainConfig(
+                flags=['nand', 'orin', 'v05'],
+                modules=[
+                    ModuleConfig('Rs485V05', socket=1, pin1=26, pin1_on_expander=True, pin2=27, pin2_on_expander=True, pin3=15, pin3_on_expander=True, pin4=13, pin4_on_expander=True),
+                    ModuleConfig('OogiirV07', socket=2, pin1=5, pin1_on_expander=False, pin2=4, pin2_on_expander=False, pin3=36, pin3_on_expander=False, pin4=13, pin4_on_expander=False),
+                    ModuleConfig('CanV06', socket=3, pin1=32, pin1_on_expander=False, pin2=33, pin2_on_expander=False, pin3=2, pin3_on_expander=True, pin4=14, pin4_on_expander=True),
+                    ModuleConfig('OogiirV07', socket=4, pin1=5, pin1_on_expander=True, pin2=4, pin2_on_expander=True, pin3=32, pin3_on_expander=True, pin4=33, pin4_on_expander=True),
+                    ModuleConfig('BumperV03', socket=5, pin1=35, pin1_on_expander=True, pin2=18, pin2_on_expander=True, pin3=21, pin3_on_expander=True, pin4=19, pin4_on_expander=True),
+                    ModuleConfig('CanV06', socket=6, pin1=22, pin1_on_expander=True, pin2=23, pin2_on_expander=True, pin3=12, pin3_on_expander=True, pin4=25, pin4_on_expander=True)
+                ]
+            ),
         }
 
     @property
