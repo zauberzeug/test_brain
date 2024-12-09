@@ -9,6 +9,11 @@ current_datetime=$(date +"%Y-%m-%d %H:%M:%S")
 # Specify the file name
 file_name="$HOME/datetime.txt"
 
+# Get Unix timestamp
+unix_time=$(date +%s)
+# Write Unix timestamp to file
+echo "Unix Timestamp: $unix_time" >> "$file_name"
+
 # Write the date and time to the file
 echo "Current Date and Time: $current_datetime" >> "$file_name"
 
