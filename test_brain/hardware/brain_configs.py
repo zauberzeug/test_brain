@@ -405,5 +405,5 @@ class BrainConfigs:
                 pin4_on_expander=module_config.pin4_on_expander,
             )
             brain_modules.append(module)
-        brain = TestBrain(self._robot_brain, config.flags, brain_modules)
+        brain = TestBrain(robot_brain_name, self._robot_brain, config.flags, brain_modules)
         return brain
