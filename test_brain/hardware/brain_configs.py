@@ -102,7 +102,7 @@ class BrainConfigs:
                     ModuleConfig('CanV06', socket=3, pin1=32, pin1_on_expander=False, pin2=33, pin2_on_expander=False, pin3=2, pin3_on_expander=True, pin4=14, pin4_on_expander=True),
                     ModuleConfig('OogoorV01', socket=4, pin1=33, pin1_on_expander=True, pin2=4, pin2_on_expander=True, pin3=32, pin3_on_expander=True, pin4=5, pin4_on_expander=True),
                     ModuleConfig('IigiirV02', socket=5, pin1=35, pin1_on_expander=True, pin2=18, pin2_on_expander=True, pin3=21, pin3_on_expander=True, pin4=19, pin4_on_expander=True),
-                    ModuleConfig('CanV04', socket=6, pin1=22, pin1_on_expander=True, pin2=23, pin2_on_expander=True, pin3=12, pin3_on_expander=True, pin4=25, pin4_on_expander=True)
+                    ModuleConfig('Rs485V05', socket=6, pin1=22, pin1_on_expander=True, pin2=23, pin2_on_expander=True, pin3=12, pin3_on_expander=True, pin4=25, pin4_on_expander=True)
                 ]
             ),
             'rb20': BrainConfig(
