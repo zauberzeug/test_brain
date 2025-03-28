@@ -37,8 +37,7 @@ class TestBrain:
             bluetooth = Bluetooth("Test Brain: {self.name}")
             serial = Serial(26, 27, 115200, 1)
             p0 = Expander(serial, 25, 14)
-            # TODO: use IMU
-            #imu = Imu()
+            imu = Imu()
             ''')
         for module in self.modules:
             if module is None:
