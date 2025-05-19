@@ -47,6 +47,17 @@ class BrainConfigs:
     def __init__(self, robot_brain):
         self._robot_brain = robot_brain
         self._brain_configs = {
+            'rb10': BrainConfig(
+                flags=['nand', 'v05'],
+                modules=[
+                    ModuleConfig('Rs485V05', socket=1, pin1=26, pin1_on_expander=True, pin2=27, pin2_on_expander=True, pin3=15, pin3_on_expander=True, pin4=13, pin4_on_expander=True),
+                    ModuleConfig('OogiirV07', socket=2, pin1=5, pin1_on_expander=False, pin2=4, pin2_on_expander=False, pin3=36, pin3_on_expander=False, pin4=13, pin4_on_expander=False),
+                    ModuleConfig('CanV06', socket=3, pin1=32, pin1_on_expander=False, pin2=33, pin2_on_expander=False, pin3=2, pin3_on_expander=True, pin4=14, pin4_on_expander=True),
+                    ModuleConfig('OogiirV07', socket=4, pin1=5, pin1_on_expander=True, pin2=4, pin2_on_expander=True, pin3=32, pin3_on_expander=True, pin4=33, pin4_on_expander=True),
+                    ModuleConfig('OogiirV06', socket=5, pin1=19, pin1_on_expander=True, pin2=18, pin2_on_expander=True, pin3=21, pin3_on_expander=True, pin4=35, pin4_on_expander=True),
+                    ModuleConfig('OogiirV07', socket=6, pin1=12, pin1_on_expander=True, pin2=23, pin2_on_expander=True, pin3=25, pin3_on_expander=True, pin4=22, pin4_on_expander=True)
+                ]
+            ),
             'rb11': BrainConfig(
                 flags=[],
                 modules=[
