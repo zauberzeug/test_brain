@@ -40,16 +40,16 @@ class System:
                         with ui.column():
                             ui.label('Hardware Manger').classes('font-bold')
                             ui.label('rdyp:').classes('col-grow') \
-                                .bind_text_from(self.test_brain, 'rdyp_status', backward=lambda rdyp_status: f'rdyp: {rdyp_status}')
+                                .bind_text_from(self.test_brain, 'rdyp_status', backward=lambda rdyp_status: f'RDYP: {rdyp_status}')
                             ui.label('vdp:').classes('col-grow') \
-                                .bind_text_from(self.test_brain, 'vdp_status', backward=lambda vdp_status: f'vdp: {vdp_status}')
+                                .bind_text_from(self.test_brain, 'vdp_status', backward=lambda vdp_status: f'+VDP: {vdp_status}')
                             ui.label('heap:').classes('col-grow') \
                                 .bind_text_from(self.test_brain, 'heap', backward=lambda heap: f'heap: {heap}')
                             ui.switch(
-                                'en3', value=True, on_change=self.test_brain.set_en3) \
+                                'EN3', value=True, on_change=self.test_brain.set_en3) \
                                     .bind_value_to(self.test_brain, 'en3')
                             ui.switch(
-                                'rdyp', value=True, on_change=lambda e: self.test_brain.set_rdyp()) \
+                                'RDYP', value=True, on_change=lambda e: self.test_brain.set_rdyp()) \
                                     .bind_value_to(self.test_brain, 'rdyp')
                             ui.button('Reset Lizard', on_click=self.robot_brain.restart)
             with ui.row():

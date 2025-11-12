@@ -84,8 +84,8 @@ class TestBrain:
                 words.pop(0) #pop core.output
                 words.pop(0) #pop core.millis
                 self.heap = float(words.pop(0))
-                self.rdyp_status = int(words.pop(0)) == 1
-                self.vdp_status = int(words.pop(0)) == 1
+                self.rdyp_status = (words.pop(0)) == 'true'
+                self.vdp_status = (words.pop(0)) == 'true'
 
                 for module in self.modules:
                     module.handle_core_output(words)
