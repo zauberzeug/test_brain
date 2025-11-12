@@ -30,7 +30,7 @@ class TestBrain:
         rosys.on_repeat(self.update, 0.01)
 
     def generate_lizard_code(self) -> str:
-        output_fields = ['core.millis','core.heap', 'rdyp_status.level', 'vdp_status.level']
+        output_fields = ['core.millis','core.heap', 'rdyp_status.active', 'vdp_status.active']
         code = remove_indentation(f'''
             rdyp = Output(15)
             en3 = Output(12)
@@ -46,7 +46,9 @@ class TestBrain:
             output_fields.extend(module.core_message_fields)
         code += remove_indentation(f'''
             rdyp_status = Input(39)
+            rdyp_status.inverted = true
             vdp_status = p0.Input(39)
+            vdp_status.inverted = true
             core.output("{' '.join(output_fields)}")
             rdyp.on()
             en3.on()
